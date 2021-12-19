@@ -4,7 +4,7 @@ export interface Run {
     (client: Helper, ...args: any[]): any;
 }
 
-export interface RoxyEvent {
-    bind: string;
+export interface RoxyCommands {
+    name: string;
     run: Run;
 }
