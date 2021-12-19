@@ -6,7 +6,7 @@ import * as fs from 'fs';
 export class Helper extends Client {
     public events: Collection<string, FoxyEvent> = new Collection();
     public settings: HelperSettings;
-    constructor(args: ClientOptions = {}, settings: HelperSettings){
+    constructor(args, settings: HelperSettings){
         super(args);
         this.settings = settings;
     }
@@ -21,7 +21,7 @@ export class Helper extends Client {
         console.info('\x1b[37m\x1b[44mINFO\x1b[0m: Eventos carregados!');
     }
     start(){
-        console.info('\x1b[37m\x1b[44mINFO\x1b[0m: Iniciando a Foxy Helper...');
+        console.info('\x1b[37m\x1b[44mINFO\x1b[0m: Iniciando a Roxy...');
         this.loadEvents();
         super.login(this.settings.token);
     }

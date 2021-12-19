@@ -1,4 +1,4 @@
-import { Helper } from './HelperClient';
+import { Helper } from './RoxyClient';
 
 export interface Run {
     (client: Helper, ...args: any[]): any;

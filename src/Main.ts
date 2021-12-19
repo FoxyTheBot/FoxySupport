@@ -1,8 +1,5 @@
-import { Intents } from 'discord.js';
-import { Helper } from './client/HelperClient';
+import { Helper } from './client/RoxyClient';
 import * as Settings from '../settings.json';
 
-require('../../src/FoxyReply.js');
-
-const FoxyHelper = new Helper({ws:{intents: Intents.ALL}}, Settings);
+const FoxyHelper = new Helper({ intents: ["GUILDS", "DIRECT_MESSAGES", "GUILD_MESSAGES", "GUILD_MESSAGE_TYPING", "GUILD_MEMBERS"] }, Settings);
 FoxyHelper.start();
