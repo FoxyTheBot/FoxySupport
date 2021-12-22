@@ -14,7 +14,7 @@ export class Helper extends Client {
     }
 
     loadCommands() {
-        let commandFiles = fs.readdirSync('./dist/src/commands').filter((file: string) => file.endsWith('.js'));
+        const commandFiles = fs.readdirSync('./src/commands').filter((file: string) => file.endsWith('.ts'));
         commandFiles.forEach(async (file: string) => {
             console.info(`\x1b[37m\x1b[44mINFO\x1b[0m: Carregando comando: ${file}...`);
             const commandFile: RoxyCommands = await import(`../commands/${file}`);
@@ -23,7 +23,7 @@ export class Helper extends Client {
     }
 
     loadEvents() {
-        let eventFiles = fs.readdirSync('./dist/src/events/').filter((file: string) => file.endsWith('.js'));
+        const eventFiles = fs.readdirSync('./src/events/').filter((file: string) => file.endsWith('.ts'));
         eventFiles.forEach(async (file: string) => {
             console.info(`\x1b[37m\x1b[44mINFO\x1b[0m: Carregando evento: ${file}...`);
             const eventFile: RoxyEvent = await import(`../events/${file}`);
