@@ -7,7 +7,7 @@ export = {
                 const role = await message.guild.roles.fetch("768275121290870814");
                 if (!message.member.roles.cache.find(r => r.id === role.id)) {
                     message.reply("<:meow_blush:768292358458179595> | Agora você irá receber todas as novidades da Foxy :3");
-                    return message.roles.add(role);
+                    return message.member.roles.add(role);
                 } else {
                     message.member.roles.remove(role);
                     message.reply("<:sad_cat_1:768291156026720328> | Você não irá mais receber as novidades da Foxy :c");
