@@ -39,8 +39,19 @@ export = {
                 break;
             }
 
+            case 'status': {
+                const role = await message.guild.roles.fetch("925578255577284689");
+                if (!message.member.roles.cache.find(r => r.id === role.id)) {
+                    message.reply("<:meow_blush:768292358458179595> | Agora você irá receber as atualizações de status da Foxy :3");
+                    return message.member.roles.add(role);
+                } else {
+                    message.member.roles.remove(role);
+                    message.reply("<:sad_cat_1:768291156026720328> | Agora você não irá receber as atualizações de status da Foxy :3");
+                }
+            }
+
             default: {
-                message.reply("<:meow_blush:768292358458179595> | Você deve informar o que deseja receber, `novidades`, `wip` ou `background`");
+                message.reply("<:meow_blush:768292358458179595> | Você deve informar o que deseja receber, `novidades`, `wip` ou `background`, `status`");
             }
         }
     }
