@@ -23,6 +23,7 @@
   "homepage": "https://github.com/BotFoxy/Roxy#readme",
   "dependencies": {
     "@types/node": "^14.14.41",
-    "discord.js": "^13.3.1"
+    "discord.js": "^13.3.1",
+    "mongoose": "^6.3.3"
   }
 }

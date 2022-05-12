@@ -64,7 +64,7 @@ export = {
             }
 
             default: {
-                message.reply("<:meow_blush:768292358458179595> | Você deve informar o que deseja receber, `novidades`, `wip` ou `background`, `status`, `foxymix`");
+                message.reply("<:meow_blush:768292358458179595> | Você deve informar o que deseja receber, `novidades`, `wip`, `background`, `status` ou `foxymix`");
             }
         }
     }

@@ -2,15 +2,19 @@ import { Client, Collection } from 'discord.js';
 import { RoxyEvent } from './Event';
 import { RoxyCommands } from './Command';
 import { HelperSettings } from './Settings';
+import DatabaseManager from './DatabaseManager';
 import * as fs from 'fs';
 
 export class Helper extends Client {
     public commands: Collection<string, RoxyCommands> = new Collection();
     public events: Collection<string, RoxyEvent> = new Collection();
     public settings: HelperSettings;
+    public database: DatabaseManager;
+
     constructor(args, settings: HelperSettings) {
         super(args);
         this.settings = settings;
+        this.database = new DatabaseManager(this.settings.db, { useNewUrlParser: true, useUnifiedTopology: true, writeConcern: "majority" }, this);
     }
 
     loadCommands() {
