@@ -6,6 +6,15 @@ export = {
 
     async run(client, message, args) {
         if (!config.authorizedUsers.includes(message.author.id)) return message.reply("<:meow_blush:768292358458179595> | Você não tem permissão para usar esse comando!");
+        if (!args[0]) {
+            const embed = new MessageEmbed();
+
+            embed.setTitle("Admin Only");
+            embed.setDescription("Lembre-se de executar `fh!dev <função> <ID> <valor>`");
+            embed.addField("Funções", "`premium` - Ativa ou desativa o premium do usuário\n`ban` - Banir ou desbanir o usuário\n`foxcoins` - Adicionar ou remover FoxCoins do usuário");
+            embed.addField("Valores", "`true`, `false` (Válidos para ban) \n `add`, `remove` (Válidos para foxcoins) \n `generate`, `remove` (Válidos para premium)");
+            return message.channel.send({ embeds: [embed] });
+        }
         if (!args[1] || isNaN(args[1])) return message.reply("<:meow_blush:768292358458179595> | Você precisa informar o ID do usuário!");
         const userData = await client.database.getUser(args[1]);
         if (!userData) return message.reply("<:meow_blush:768292358458179595> | Esse usuário não existe!");
@@ -63,17 +72,6 @@ export = {
                 }
                 break;
             }
-
-            default: {
-                const embed = new MessageEmbed();
-
-                embed.setTitle("Admin Only");
-                embed.setDescription("Lembre-se de executar `fh!dev <função> <ID> <valor>`");
-                embed.addField("Funções", "`premium` - Ativa ou desativa o premium do usuário\n`ban` - Banir ou desbanir o usuário\n`foxcoins` - Adicionar ou remover FoxCoins do usuário");
-                embed.addField("Valores", "`true`, `false` (Válidos para ban) \n `add`, `remove` (Válidos para foxcoins) \n `generate`, `remove` (Válidos para premium)");
-                message.channel.send({ embeds: [embed] });
-            }
-
         }
 
 
