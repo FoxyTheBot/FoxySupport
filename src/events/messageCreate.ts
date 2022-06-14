@@ -9,7 +9,7 @@ export const run: Run = async (client, message) => {
     if (userRole) {
         const userData: any = await client.database.getUser(message.author.id);
 
-        if (userData.premium === false) {
+        if (!userData.premium) {
             userData.premium = true;
             userData.premiumDate = new Date();
             userData.save();
