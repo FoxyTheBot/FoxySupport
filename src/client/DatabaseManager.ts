@@ -34,6 +34,7 @@ export default class DatabaseManager {
             background: String,
             backgrounds: Array,
             premiumType: String,
+            langauge: String,
         }, { versionKey: false, id: false });
 
         this.client = client;
