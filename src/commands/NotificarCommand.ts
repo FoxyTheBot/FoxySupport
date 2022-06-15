@@ -63,8 +63,19 @@ export = {
                 break;
             }
 
+            case 'partner': {
+                const role = await message.guild.roles.fetch("975519789764194324");
+                if (!message.member.roles.cache.find(r => r.id === role.id)) {
+                    message.reply("<:meow_blush:768292358458179595> | Agora você irá receber as notificações de parceria");
+                    return message.member.roles.add(role);
+                } else {
+                    message.member.roles.remove(role);
+                    message.reply("<:sad_cat_1:768291156026720328> | Você não irá mais receber as notificações de parceria");
+                }
+            }
+
             default: {
-                message.reply("<:meow_blush:768292358458179595> | Você deve informar o que deseja receber, `novidades`, `wip`, `background`, `status` ou `foxymix`");
+                message.reply("<:meow_blush:768292358458179595> | Você deve informar o que deseja receber: `novidades`, `wip`, `background`, `status`, `partner` ou `foxymix`");
             }
         }
     }
