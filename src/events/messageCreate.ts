@@ -3,19 +3,52 @@ import { Run } from '../client/Event';
 export const bind: string = 'messageCreate';
 
 export const run: Run = async (client, message) => {
-    const role = await message.guild.roles.fetch("986398691751522354");
-    const userRole = message.member.roles.cache.find(r => r.id === role.id);
+    /* PremiumType checker */
+    const roles = ["986676570431307827", "986676477833642024", "986672822690676778"]
+    const userData: any = await client.database.getUser(message.author.id);
 
-    if (userRole) {
-        const userData: any = await client.database.getUser(message.author.id);
+    if (userData.premium && !userData.premiumType) {
+        const role = await message.guild.roles.fetch("986710043657400321");
+        if (!message.member.roles.cache.find(r => r.id === role.id)) {
+            message.member.roles.add(role);
+        }
+        userData.premiumType = "VETERAN";
+        userData.save();
+    }
 
-        if (!userData.premium) {
-            userData.premium = true;
-            userData.premiumDate = new Date();
-            userData.save();
-            console.info(`Premium activated for ${message.author.id}`);
+    for (const role of roles) {
+        const roleObj = await message.guild.roles.fetch(role);
+        if (message.member.roles.cache.find(r => r.id === roleObj.id)) {
+            switch (role) {
+                case "986676570431307827": {
+                    userData.premiumType = "INFINITY_TURBO";
+                    userData.premium = true;
+                    userData.premiumDate = new Date();
+                    userData.save();
+                    break;
+                }
+
+                case "986676477833642024": {
+                    userData.premiumType = "INFINITY_PRO";
+                    userData.premium = true;
+                    userData.premiumDate = new Date();
+                    userData.save();
+                    break;
+                }
+
+                case "986672822690676778": {
+                    userData.premiumType = "INFINITY_ESSENTIALS";
+                    userData.premium = true;
+                    userData.premiumDate = new Date();
+                    userData.save();
+                    break;
+                }
+            }
         }
     }
+
+    /* End of PremiumType checker */
+
     const prefixRegex: Object = new RegExp(`^(${client.settings.prefix}|<@!?${client.user.id}>)( )*`, "gi");
 
     if (!message.content.match(prefixRegex)) return;

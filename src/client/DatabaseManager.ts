@@ -32,7 +32,9 @@ export default class DatabaseManager {
             repCount: Number,
             lastRep: Date,
             background: String,
-            backgrounds: Array
+            backgrounds: Array,
+            premiumType: String,
+            locale: "pt-BR",
         }, { versionKey: false, id: false });
 
         this.client = client;

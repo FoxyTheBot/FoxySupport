@@ -6,8 +6,6 @@ Roxy.start();
 
 process.on('uncaughtException', err => {
     console.error('Um erro inesperado e GRAVE ocorreu!\n', err);
-    process.exit(1);
-
 });
 
 process.on("unhandledRejection", (err) => {

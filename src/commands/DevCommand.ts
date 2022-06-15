@@ -29,6 +29,7 @@ export = {
                     await client.database.removeKey(userData._id);
                     userData.premium = false;
                     userData.premiumDate = null;
+                    userData.premiumType = null;
                     await userData.save();
                     return message.reply("<:meow_blush:768292358458179595> | O código de ativação e o premium foram removidos do usuário!");
                 } else {
