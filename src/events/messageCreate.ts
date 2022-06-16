@@ -16,6 +16,12 @@ export const run: Run = async (client, message) => {
             userData.premiumType = "VETERAN";
             userData.save();
         }
+        if (userData.premium && userData.premiumType === "VETERAN") {
+            const role = await message.guild.roles.fetch("986710043657400321");
+            if (!message.member.roles.cache.find(r => r.id === role.id)) {
+                message.member.roles.add(role);
+            }
+        }
 
         for (const role of roles) {
             const roleObj = await message.guild.roles.fetch(role);
