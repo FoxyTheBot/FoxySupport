@@ -22,6 +22,7 @@ export const run: Run = async (client, message) => {
             if (message.member.roles.cache.find(r => r.id === roleObj.id)) {
                 switch (role) {
                     case "986676570431307827": {
+                        userData.balance += 50000;
                         userData.premiumType = "INFINITY_TURBO";
                         userData.premium = true;
                         userData.premiumDate = new Date();
@@ -30,6 +31,7 @@ export const run: Run = async (client, message) => {
                     }
 
                     case "986676477833642024": {
+                        userData.balance += 25000;
                         userData.premiumType = "INFINITY_PRO";
                         userData.premium = true;
                         userData.premiumDate = new Date();
@@ -38,6 +40,7 @@ export const run: Run = async (client, message) => {
                     }
 
                     case "986672822690676778": {
+                        userData.balance += 10000;
                         userData.premiumType = "INFINITY_ESSENTIALS";
                         userData.premium = true;
                         userData.premiumDate = new Date();
