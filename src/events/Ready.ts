@@ -7,8 +7,6 @@ export const run: Run = (client) => {
     let status: object[] = [
         { name: `Roberto Carlos - Guerra dos Meninos`, type: "LISTENING" },
         { name: `The Living Tombstone - It's been so long`, type: "LISTENING" },
-        { name: "The Living Tombstone - Die In A Fire", type: "LISTENING" },
-        { name: "Roberto Carlos - Lady Laura", type: "LISTENING" },
         { name: "Undertale - Hopes and Dreams", type: "LISTENING" },
     ];
 
