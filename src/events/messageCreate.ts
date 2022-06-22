@@ -9,10 +9,6 @@ export const run: Run = async (client, message) => {
 
     if (userData) {
         if (userData.premium && !userData.premiumType) {
-            const role = await message.guild.roles.fetch("986710043657400321");
-            if (!message.member.roles.cache.find(r => r.id === role.id)) {
-                message.member.roles.add(role);
-            }
             userData.premiumType = "VETERAN";
             userData.save();
         }
