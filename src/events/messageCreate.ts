@@ -50,6 +50,11 @@ export const run: Run = async (client, message) => {
                         break;
                     }
                 }
+            } else {
+                userData.premiumType = null;
+                userData.premium = false;
+                userData.premiumDate = null;
+                userData.save();
             }
         }
     }
