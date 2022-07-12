@@ -54,7 +54,7 @@ export const run: Run = async (client, message) => {
                     userData.premiumType = null;
                     userData.premium = false;
                     userData.premiumDate = null;
-                    userData.save();
+                    await userData.save();
                 }
             }
         }
