@@ -35,6 +35,7 @@ export default class DatabaseManager {
             backgrounds: Array,
             premiumType: String,
             langauge: String,
+            initialFoxCoins: Boolean
         }, { versionKey: false, id: false });
 
         this.client = client;
