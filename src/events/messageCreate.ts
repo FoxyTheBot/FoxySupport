@@ -4,7 +4,6 @@ export const bind: string = 'messageCreate';
 
 export const run: Run = async (client, message) => {
     /* PremiumType checker */
-    const roles = ["986676570431307827", "986676477833642024", "986672822690676778"]
     if (!message.isWebhook) {
         const userData: any = await client.database.getUser(message.author.id);
         if (userData) {
@@ -12,50 +11,47 @@ export const run: Run = async (client, message) => {
                 userData.premiumType = "VETERAN";
                 userData.save();
             }
-            if (userData.premium && userData.premiumType === "VETERAN") {
-                const role = await message.guild.roles.fetch("986710043657400321");
-                if (!message.member.roles.cache.find(r => r.id === role.id)) {
-                    message.member.roles.add(role);
+
+            const roles = await message.member.roles.cache.filter(r => r.id);
+            const listedRoles = roles.sort((a, b) => b.position - a.position).map(role => role.id);
+            if (listedRoles.includes("986676570431307827")) {
+                if (!userData.initialFoxCoins) {
+                    userData.balance += 50000;
+                    userData.initialFoxCoins = true;
                 }
-            }
+                userData.premiumType = "INFINITY_TURBO";
+                userData.premium = true;
+                userData.premiumDate = new Date();
+                userData.save();
 
-            for (const role of roles) {
-                const roleObj = await message.guild.roles.fetch(role);
-                if (message.member.roles.cache.find(r => r.id === roleObj.id)) {
-                    switch (role) {
-                        case "986676570431307827": {
-                            userData.balance += 50000;
-                            userData.premiumType = "INFINITY_TURBO";
-                            userData.premium = true;
-                            userData.premiumDate = new Date();
-                            userData.save();
-                            break;
-                        }
-
-                        case "986676477833642024": {
-                            userData.balance += 25000;
-                            userData.premiumType = "INFINITY_PRO";
-                            userData.premium = true;
-                            userData.premiumDate = new Date();
-                            userData.save();
-                            break;
-                        }
-
-                        case "986672822690676778": {
-                            userData.balance += 10000;
-                            userData.premiumType = "INFINITY_ESSENTIALS";
-                            userData.premium = true;
-                            userData.premiumDate = new Date();
-                            userData.save();
-                            break;
-                        }
-                    }
-                } else {
-                    userData.premiumType = null;
-                    userData.premium = false;
-                    userData.premiumDate = null;
-                    await userData.save();
+            } else if (listedRoles.includes("986676477833642024")) {
+                if (!userData.initialFoxCoins) {
+                    userData.balance += 25000;
+                    userData.initialFoxCoins = true;
                 }
+                userData.premiumType = "INFINITY_PRO";
+                userData.premium = true;
+                userData.premiumDate = new Date();
+                userData.save();
+            } else if (listedRoles.includes("986672822690676778")) {
+                if (!userData.initialFoxCoins) {
+                    userData.balance += 10000;
+                    userData.initialFoxCoins = true;
+                }
+                userData.premiumType = "INFINITY_ESSENTIALS";
+                userData.premium = true;
+                userData.premiumDate = new Date();
+                userData.save();
+            } else if (listedRoles.includes("986710043657400321")) {
+                userData.premiumType = "VETERAN";
+                userData.premium = true;
+                userData.premiumDate = new Date();
+                userData.save();
+            } else {
+                userData.premiumType = null;
+                userData.premium = null;
+                userData.premiumDate = null;
+                userData.save();
             }
         }
 
