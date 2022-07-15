@@ -4,7 +4,7 @@ export const bind: string = 'messageCreate';
 
 export const run: Run = async (client, message) => {
     /* PremiumType checker */
-    if (!message.isWebhook) {
+    if (message.isUser) {
         const userData: any = await client.database.getUser(message.author.id);
         if (userData) {
             if (userData.premium && !userData.premiumType) {
