@@ -109,3 +109,5 @@ dist
 # Foxy files
 settings.json
 package-lock.json
+
+config.json
