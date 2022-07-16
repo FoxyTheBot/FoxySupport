@@ -21,6 +21,7 @@ export const run: Run = async (client, message) => {
                 }
                 userData.premiumType = "INFINITY_TURBO";
                 userData.premium = true;
+                userData.repCount++;
                 userData.premiumDate = new Date();
                 userData.save();
 
