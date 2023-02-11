@@ -28,4 +28,4 @@ public class Settings {
 ```
 
 ### Running
-- Go to `"Run/Debug configuration"` > `"Edit Configuration"` > `"Add New Configuration"` > `"Application"` > `"Roxy"` > `"Main Class"` > `"win.foxybot.roxy.Main"` > `"OK"`
+- Go to `"Run/Debug configuration"` > `"Edit Configuration"` > `"Add New Configuration"` > `"Application"` > `"Roxy"` > `"Main Class"` > `"win.foxybot.roxy.Roxy"` > `"OK"`
