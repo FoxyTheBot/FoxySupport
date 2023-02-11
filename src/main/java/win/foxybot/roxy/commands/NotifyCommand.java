@@ -7,7 +7,7 @@ import javax.annotation.Nonnull;
 
 public class NotifyCommand extends ListenerAdapter {
     @Override
-    public void onSlashCommandInteraction(@Nonnull SlashCommandInteractionEvent e) {
+    public void onSlashCommandInteraction(SlashCommandInteractionEvent e) {
         if (!e.getName().equals("notificar")) return;
         Role role = e.getGuild().getRoleById("768275121290870814");
         if (e.getMember().getRoles().contains(role)) {
