@@ -6,7 +6,11 @@
 git clone https://github.com/FoxyTheBot/Roxy
 ```
 
-- You need to install an IDE to change the code, I recommend and [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/download/#section=windows), It's free!
+### Requirements
+- Java 8 ou superior
+- Maven 3.5.0 ou superior
+- Git
+- Um editor de código (Recomendo o [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/download/#section=windows))
 
 ### Installing Dependencies
 - Go to `"Run/Debug configuration"` > `"Edit Configuration"` > `"Add New Configuration"` > `"Maven"` > `"Maven Projects"` > `"Roxy"` > `"Command Line"` > `"clean install"`
