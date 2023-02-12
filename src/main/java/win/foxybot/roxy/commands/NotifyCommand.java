@@ -3,7 +3,6 @@ package win.foxybot.roxy.commands;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.entities.Role;
-import javax.annotation.Nonnull;
 
 public class NotifyCommand extends ListenerAdapter {
     @Override
