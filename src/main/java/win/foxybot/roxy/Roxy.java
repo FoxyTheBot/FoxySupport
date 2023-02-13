@@ -17,9 +17,8 @@ import java.util.EnumSet;
 public class Roxy extends ListenerAdapter {
     public static void main(String[] args) throws LoginException {
         JDABuilder.createLight(Settings.TOKEN, EnumSet.noneOf(GatewayIntent.class))
-                .setStatus(OnlineStatus.ONLINE).setActivity(Activity.listening("Toby Fox - Hopes and Dreams"))
-                .addEventListeners(new Roxy(),
-                        new NotifyCommand()).build();
+                .setStatus(OnlineStatus.ONLINE).setActivity(Activity.playing("JT Music - Join Us For A Bite"))
+                .addEventListeners(new Roxy(), new NotifyCommand()).build();
     }
 
     @Override
@@ -32,10 +31,7 @@ public class Roxy extends ListenerAdapter {
                                 new SubcommandData("novidades", "Receba notificações de novidades da Foxy"),
                                 new SubcommandData("canary", "Receba notificações de atualizações da Canary"),
                                 new SubcommandData("status", "Receba notificações de atualizações de status"),
-                                new SubcommandData("partner", "Receba notificações de novos parceiros")
-                        )
-        );
-
+                                new SubcommandData("partner", "Receba notificações de novos parceiros")));
         commands.queue();
     }
 }
