@@ -16,7 +16,7 @@ import java.util.EnumSet;
 public class Roxy extends ListenerAdapter {
     public static void main(String[] args) throws LoginException {
         JDABuilder.createLight(Settings.TOKEN, EnumSet.noneOf(GatewayIntent.class)).enableIntents(GatewayIntent.GUILD_MEMBERS)
-                .setStatus(OnlineStatus.ONLINE).setActivity(Activity.listening("https://twitch.tv/wing4merbr"))
+                .setStatus(OnlineStatus.ONLINE).setActivity(Activity.playing("https://twitch.tv/wing4merbr"))
                 .addEventListeners(new Roxy(), new NotifyCommand(), new Ready(), new UserJoinModule(), new UserRemoveModule()).build();
     }
 }
