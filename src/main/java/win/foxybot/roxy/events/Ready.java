@@ -16,9 +16,8 @@ public class Ready extends ListenerAdapter {
                 Commands.slash("notificar", "Receba notificações da Foxy")
                         .addSubcommands(
                                 new SubcommandData("novidades", "Receba notificações de novidades da Foxy"),
-                                new SubcommandData("canary", "Receba notificações de atualizações da Canary"),
-                                new SubcommandData("status", "Receba notificações de atualizações de status"),
-                                new SubcommandData("partner", "Receba notificações de novos parceiros")));
+                                new SubcommandData("beta", "Receba notificações de atualizações da Canary"),
+                                new SubcommandData("status", "Receba notificações de atualizações de status")));
         commands.queue();
     }
 }
