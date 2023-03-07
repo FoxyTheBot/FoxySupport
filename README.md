@@ -36,4 +36,4 @@ public class Settings {
 ```
 
 ### 🏃‍♂️ Running
-- Go to `"Run/Debug configuration"` > `"Edit Configuration"` > `"Add New Configuration"` > `"Application"` > `"FoxySupport"` > `"Main Class"` > `"win.foxybot.support.Roxy"` > `"OK"`
+- Go to `"Run/Debug configuration"` > `"Edit Configuration"` > `"Add New Configuration"` > `"Application"` > `"FoxySupport"` > `"Main Class"` > `"win.foxybot.support.Main"` > `"OK"`
