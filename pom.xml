@@ -19,7 +19,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>win.foxybot.roxy.Roxy</mainClass>
+                            <mainClass>win.foxybot.support.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

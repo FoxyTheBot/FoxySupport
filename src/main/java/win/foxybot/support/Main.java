@@ -1,22 +1,22 @@
-package win.foxybot.roxy;
+package win.foxybot.support;
 
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import win.foxybot.roxy.commands.NotifyCommand;
-import win.foxybot.roxy.events.Ready;
-import win.foxybot.roxy.events.UserJoinModule;
-import win.foxybot.roxy.events.UserRemoveModule;
+import win.foxybot.support.commands.NotifyCommand;
+import win.foxybot.support.events.Ready;
+import win.foxybot.support.events.UserJoinModule;
+import win.foxybot.support.events.UserRemoveModule;
 
 import javax.security.auth.login.LoginException;
 import java.util.EnumSet;
 
-public class Roxy extends ListenerAdapter {
+public class Main extends ListenerAdapter {
     public static void main(String[] args) throws LoginException {
         JDABuilder.createLight(Settings.TOKEN, EnumSet.noneOf(GatewayIntent.class)).enableIntents(GatewayIntent.GUILD_MEMBERS)
-                .setStatus(OnlineStatus.ONLINE).setActivity(Activity.playing("https://twitch.tv/wing4merbr"))
-                .addEventListeners(new Roxy(), new NotifyCommand(), new Ready(), new UserJoinModule(), new UserRemoveModule()).build();
+                .setStatus(OnlineStatus.ONLINE).setActivity(Activity.playing("twitch.tv/wing4merbr"))
+                .addEventListeners(new Main(), new NotifyCommand(), new Ready(), new UserJoinModule(), new UserRemoveModule()).build();
     }
 }

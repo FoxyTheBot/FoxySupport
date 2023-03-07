@@ -115,4 +115,4 @@ out/
 settings.json
 package-lock.json
 
-src/main/java/win/foxybot/roxy/Settings.java
+/src/main/java/win/foxybot/support/Settings.java

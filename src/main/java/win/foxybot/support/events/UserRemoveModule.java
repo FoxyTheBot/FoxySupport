@@ -1,4 +1,4 @@
-package win.foxybot.roxy.events;
+package win.foxybot.support.events;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;

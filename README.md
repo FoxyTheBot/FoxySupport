@@ -26,7 +26,7 @@ Roxy use only one dependency, JDA, so you don't need to install anything else!
 
 
 ```java
-package win.foxybot.roxy;
+package win.foxybot.support;
 
 public class Settings {
     // Replace <BOT-TOKEN> with your bot token
@@ -36,4 +36,4 @@ public class Settings {
 ```
 
 ### 🏃‍♂️ Running
-- Go to `"Run/Debug configuration"` > `"Edit Configuration"` > `"Add New Configuration"` > `"Application"` > `"Roxy"` > `"Main Class"` > `"win.foxybot.roxy.Roxy"` > `"OK"`
+- Go to `"Run/Debug configuration"` > `"Edit Configuration"` > `"Add New Configuration"` > `"Application"` > `"Roxy"` > `"Main Class"` > `"win.foxybot.support.Roxy"` > `"OK"`
