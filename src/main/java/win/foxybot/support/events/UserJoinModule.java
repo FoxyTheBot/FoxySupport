@@ -34,7 +34,6 @@ public class UserJoinModule extends ListenerAdapter {
         embed.setDescription("Olá, " + event.getMember().getAsMention() + "! Bem-Vindo(a) a Cafeteria da Foxy! Caso " +
                 "tenha dúvidas fique a vontade para ir em <#1065999538332119131>, caso tenha alguma sugestão ou bug " +
                 "vá para <#1065996156208947220>!");
-        embed.setFooter("Para quem não me conhece, eu sou a Roxy! Melhor amiga da Foxy :3");
         embed.setThumbnail(event.getMember().getEffectiveAvatarUrl());
         Objects.requireNonNull(foxyGuild.getTextChannelById("1067208168301666444")).sendMessage(event.getMember().getAsMention()).setEmbeds(embed.build()).queue();
     }
