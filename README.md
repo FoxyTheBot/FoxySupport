@@ -1,5 +1,6 @@
-<img height="100" src="https://cdn.discordapp.com/attachments/1068525425963302936/1088896128721899672/foxylist.png" align="left"><h1 align="center">💁‍♀️ Foxy Support</h1>
+<img height="150" src="https://cdn.discordapp.com/attachments/1068525425963302936/1088896128721899672/foxylist.png" align="left"><h1 align="">💁‍♀️ Foxy Support</h1>
 
+<br>
 <br>
 
 ### ⚠ Warning
