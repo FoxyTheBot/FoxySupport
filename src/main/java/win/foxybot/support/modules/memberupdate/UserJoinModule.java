@@ -1,4 +1,4 @@
-package win.foxybot.support.events;
+package win.foxybot.support.modules.memberupdate;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
