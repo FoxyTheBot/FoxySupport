@@ -14,12 +14,15 @@ public class InviteBlockerModule extends ListenerAdapter {
         long guildId = e.getGuild().getIdLong();
         long channelId = e.getChannel().getIdLong();
 
-        if (guildId != 768267522670723094L || channelId != 869384482552152104L) return;
+        if (guildId != 768267522670723094L || channelId == 869384482552152104L) {
+            return;
+        }
+
         if (messageContent.contains("discord.gg")
                 || messageContent.contains("discord.com/invite")
                 || messageContent.contains("discordapp.com/invite")) {
             message.delete().queue();
-            e.getChannel().sendMessage(Emotes.FOXY_BAN + Objects.requireNonNull(e.getMember()).getAsMention() + " Você não pode enviar convites de servidores aqui!").queue();
+            e.getChannel().sendMessage(Emotes.FOXY_BAN + Objects.requireNonNull(e.getMember()).getAsMention() + ", você não pode enviar convites de servidores aqui!").queue();
         }
     }
 }
