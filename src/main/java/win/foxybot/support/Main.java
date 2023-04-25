@@ -16,7 +16,7 @@ import java.util.EnumSet;
 
 public class Main extends ListenerAdapter {
     public static void main(String[] args) throws LoginException {
-        JDABuilder.createLight(Settings.TOKEN, EnumSet.noneOf(GatewayIntent.class)).enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS, GatewayIntent.MESSAGE_CONTENT)
+        JDABuilder.createDefault(Settings.TOKEN, EnumSet.noneOf(GatewayIntent.class)).enableIntents(GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS, GatewayIntent.MESSAGE_CONTENT)
                 .setStatus(OnlineStatus.ONLINE).setActivity(Activity.playing("twitch.tv/wing4merbr"))
                 .addEventListeners(
                         new Main(),
