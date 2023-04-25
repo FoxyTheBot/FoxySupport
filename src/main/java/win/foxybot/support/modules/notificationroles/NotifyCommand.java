@@ -1,4 +1,4 @@
-package win.foxybot.support.modules.notifyroles;
+package win.foxybot.support.modules.notificationroles;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
