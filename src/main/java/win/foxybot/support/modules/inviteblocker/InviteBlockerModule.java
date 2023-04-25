@@ -18,7 +18,7 @@ public class InviteBlockerModule extends ListenerAdapter {
         long guildId = e.getGuild().getIdLong();
         long channelId = e.getChannel().getIdLong();
 
-        if (guildId != 768267522670723094L || channelId == 869384482552152104L || e.getMember().hasPermission(ADMINISTRATOR)) {
+        if (guildId != 768267522670723094L || channelId == 869384482552152104L || Objects.requireNonNull(e.getMember()).hasPermission(ADMINISTRATOR)) {
             return;
         }
         if (messageContent.contains("discord.gg/")
@@ -35,7 +35,7 @@ public class InviteBlockerModule extends ListenerAdapter {
         long guildId = e.getGuild().getIdLong();
         long channelId = e.getChannel().getIdLong();
 
-        if (guildId != 768267522670723094L || channelId == 869384482552152104L || e.getMember().hasPermission(ADMINISTRATOR)) {
+        if (guildId != 768267522670723094L || channelId == 869384482552152104L || Objects.requireNonNull(e.getMember()).hasPermission(ADMINISTRATOR)) {
             return;
         } else if (messageContent.contains("discord.gg")
                 || messageContent.contains("discord.com/invite")
