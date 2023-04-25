@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import win.foxybot.support.modules.inviteblocker.InviteBlockerModule;
-import win.foxybot.support.modules.notifyroles.NotifyCommand;
+import win.foxybot.support.modules.notificationroles.NotifyCommand;
 import win.foxybot.support.events.Ready;
 import win.foxybot.support.modules.memberupdate.UserJoinModule;
 import win.foxybot.support.modules.memberupdate.UserRemoveModule;
