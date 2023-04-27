@@ -5,7 +5,6 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import win.foxybot.support.modules.inviteblocker.InviteBlockerModule;
 import win.foxybot.support.modules.notificationroles.NotifyCommand;
 import win.foxybot.support.events.Ready;
 import win.foxybot.support.modules.memberupdate.UserJoinModule;
@@ -23,7 +22,6 @@ public class Main extends ListenerAdapter {
                         new NotifyCommand(),
                         new Ready(),
                         new UserJoinModule(),
-                        new UserRemoveModule(),
-                        new InviteBlockerModule()).build();
+                        new UserRemoveModule()).build();
     }
 }
