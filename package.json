@@ -1,0 +1,21 @@
+{
+  "name": "@foxy/support",
+  "version": "1.0.0",
+  "description": "Foxy Support is the Foxy's Support Server's bot",
+  "main": "build/src/index.js",
+  "repository": "https://github.com/FoxyTheBot/FoxySupport",
+  "author": "WinG4merBR",
+  "scripts": {
+    "build": "npx tsc --project tsconfig.json",
+    "start": "node build/src/index.js"
+  },
+  "license": "AGPL-3.0",
+  "private": true,
+  "dependencies": {
+    "discordeno": "^18.0.1",
+    "mongoose": "^7.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.1.1"
+  }
+}
