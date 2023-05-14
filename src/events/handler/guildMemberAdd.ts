@@ -18,7 +18,7 @@ const setGuildMemberAddEvent = async (): Promise<void> => {
             }
         });
 
-        const channel = await bot.helpers.getChannel("1100539530538401912");
+        const channel = await bot.helpers.getChannel("1067208168301666444");
         bot.helpers.sendMessage(channel.id, { embeds: [embed] })
 
         setTimeout(async () => {
@@ -53,7 +53,7 @@ const setGuildMemberAddEvent = async (): Promise<void> => {
                 }]
             })
             bot.helpers.sendMessage(DMChannel.id, { embeds: [dmEmbed] }).catch(() => { })
-        }, 1000);
+        }, 500);
     }
 }
 
