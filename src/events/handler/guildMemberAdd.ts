@@ -29,7 +29,7 @@ const setGuildMemberAddEvent = async (): Promise<void> => {
             })
 
             const dmEmbed = createEmbed({
-                title: "<:foxy_yay:1070906796274888795> **|** Bem-Vindo(a) a minha cafeteria!",
+                title: "<:foxy_yay:1070906796274888795> **|** Bem-Vindo(a) a Cafeteria da Foxy!",
                 description: "Aqui você pode falar com outras pessoas e fazer amizades, reportar problemas ou sugerir novas funcionalidades!",
                 fields: [{
                     "name": "<:foxy_hm:1084105543200809060> Precisa de ajuda?",
