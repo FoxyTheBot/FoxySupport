@@ -19,7 +19,10 @@ const setGuildMemberAddEvent = async (): Promise<void> => {
         });
 
         const channel = await bot.helpers.getChannel("1067208168301666444");
-        bot.helpers.sendMessage(channel.id, { embeds: [embed] })
+        bot.helpers.sendMessage(channel.id, {
+            content: `<@!${user.id}>`,
+            embeds: [embed] 
+        });
 
         setTimeout(async () => {
             const userInfo = await bot.helpers.getUser(user.id);
