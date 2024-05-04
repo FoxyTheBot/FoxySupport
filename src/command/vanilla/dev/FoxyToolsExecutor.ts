@@ -2,6 +2,8 @@ import ChatInputInteractionContext from "../../structures/ChatInputInteractionCo
 import { bot } from '../../../index';
 import { User } from "discordeno/transformers";
 import { createEmbed } from "../../../utils/discord/Embed";
+import axios from "axios";
+import config from "../../../../config.json";
 
 export default async function FoxyToolsExecutor(context: ChatInputInteractionContext, endCommand) {
     const command = context.getSubCommand();
@@ -75,6 +77,31 @@ export default async function FoxyToolsExecutor(context: ChatInputInteractionCon
                 content: `Usuário ${user.username} banido com sucesso!`,
                 flags: 64
             });
+            return endCommand();
+        }
+
+        case "change_activity": {
+            const activity = context.getOption<string>('text', false);
+            const status = context.getOption<string>('status', false);
+            const url = context.getOption<string>('url', false);
+            const type = context.getOption<number>('type', false);
+            const api = axios.create({
+                baseURL: config.api,
+                headers: {
+                    Authorization: config.authorization
+                }
+            })
+            api.post(`/status/update`, {
+                "name": activity,
+                "status": status,
+                "url": url ?? null,
+                "type": type
+            });
+        
+            context.sendReply({
+                content: "Prontinho! Atividade alterada com sucesso!",
+                flags: 64
+            })
             return endCommand();
         }
 
