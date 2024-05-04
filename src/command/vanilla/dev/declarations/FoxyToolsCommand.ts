@@ -51,67 +51,62 @@ const FoxyToolsCommand = createCommand({
             description: "Altera a atividade da Foxy",
             type: ApplicationCommandOptionTypes.SubCommand,
             options: [{
-                name: "activity",
-                description: "Altera a atividade da Foxy",
-                type: ApplicationCommandOptionTypes.SubCommand,
-                options: [{
-                    name: "type",
-                    description: "O tipo de atividade que você quer",
-                    type: ApplicationCommandOptionTypes.Number,
-                    required: true,
-                    choices: [{
-                        name: "Playing",
-                        value: 0
-                    }, {
-                        name: "Streaming",
-                        value: 1
-                    }, {
-                        name: "Listening",
-                        value: 2
-                    }, {
-                        name: "Watching",
-                        value: 3
-                    },
-                    {
-                        name: "Custom",
-                        value: 4
-                    },
-                    {
-                        name: "Competing",
-                        value: 5
-                    }]
+                name: "type",
+                description: "O tipo de atividade que você quer",
+                type: ApplicationCommandOptionTypes.Number,
+                required: true,
+                choices: [{
+                    name: "Playing",
+                    value: 0
+                }, {
+                    name: "Streaming",
+                    value: 1
+                }, {
+                    name: "Listening",
+                    value: 2
+                }, {
+                    name: "Watching",
+                    value: 3
                 },
                 {
-                    name: "status",
-                    description: "O status que você quer",
-                    type: ApplicationCommandOptionTypes.String,
-                    required: true,
-                    choices: [{
-                        name: "Online",
-                        value: "online"
-                    }, {
-                        name: "Idle",
-                        value: "idle"
-                    }, {
-                        name: "Do not disturb",
-                        value: "dnd"
-                    }, {
-                        name: "Invisible",
-                        value: "invisible"
-                    }]
+                    name: "Custom",
+                    value: 4
                 },
                 {
-                    name: "text",
-                    description: "O texto da atividade",
-                    type: ApplicationCommandOptionTypes.String,
-                    required: true
-                },
-                {
-                    name: "url",
-                    description: "A URL da atividade",
-                    type: ApplicationCommandOptionTypes.String,
-                    required: false
+                    name: "Competing",
+                    value: 5
                 }]
+            },
+            {
+                name: "status",
+                description: "O status que você quer",
+                type: ApplicationCommandOptionTypes.String,
+                required: true,
+                choices: [{
+                    name: "Online",
+                    value: "online"
+                }, {
+                    name: "Idle",
+                    value: "idle"
+                }, {
+                    name: "Do not disturb",
+                    value: "dnd"
+                }, {
+                    name: "Invisible",
+                    value: "invisible"
+                }]
+            },
+            {
+                name: "text",
+                description: "O texto da atividade",
+                type: ApplicationCommandOptionTypes.String,
+                required: true
+            },
+            {
+                name: "url",
+                description: "A URL da atividade",
+                type: ApplicationCommandOptionTypes.String,
+                required: false
             }],
         },
         {
