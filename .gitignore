@@ -1,5 +1,20 @@
-build/
-node_modules/
-yarn.lock
-yarn-error.log
+## Node files
+node_modules
+package-lock.json
+
+## Confidential files
 config.json
+
+## IDE files
+.idea
+.vscode
+.vs
+
+## Compiled files
+build
+
+## Assets
+assets/
+
+## yarn
+yarn.lock
