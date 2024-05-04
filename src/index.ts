@@ -1,29 +1,29 @@
 import { createBot, Intents, startBot } from 'discordeno';
-import { enableCachePlugin } from 'discordeno/cache-plugin';
-import { token, clientId } from '../config.json';
-import { SetupFoxySupport } from './structures/client/FoxySupportClient';
-import { setupEventHandlers } from './events';
-import { FoxySupportClient } from './types/foxy';
+import { setupFoxy, setupInternals } from './structures/client/FoxyClient';
+import { FoxyClient } from './structures/types/foxy';
+import { logger } from './utils/logger';
+import { enableCachePlugin } from 'discordeno/cache-plugin'
+import { setupEventsHandler } from './listeners';
+import config from '../config.json';
 
 const bot = createBot({
-    token: token,
-    intents: Intents.Guilds | Intents.GuildMessages | Intents.MessageContent | Intents.GuildMembers,
-    botId: BigInt(clientId)
-}) as FoxySupportClient;
+    token: config.token,
+    intents: 37379 as Intents,
+    botId: BigInt(config.clientId),
+}) as FoxyClient;
 
 enableCachePlugin(bot);
-SetupFoxySupport(bot);
-setupEventHandlers();
-
+setupFoxy(bot);
+setupInternals(bot);
+setupEventsHandler();
 startBot(bot);
 
-export { bot }
+export { bot };
 
 process.on('unhandledRejection', (err: Error) => {
-    return console.error(err);
+    return logger.error(err);
 });
 
 process.on('uncaughtException', (err) => {
-    console.error(err.stack);
-    process.exit(1);
+    logger.criticalError(err.stack);
 });
