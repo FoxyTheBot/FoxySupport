@@ -57,25 +57,6 @@ export default async function FoxyToolsExecutor(context: ChatInputInteractionCon
             break;
         }
 
-        case "change_activity": {
-            const type = context.getOption<number>('type', false)!!;
-            const activity = context.getOption<string>('activity', false)!!;
-            const status = context.getOption<any>('status', false);
-            const url = context.getOption<string>('url', false);
-
-            bot.helpers.editBotStatus({
-                status: status, activities: [{
-                    name: activity,
-                    type: type,
-                    createdAt: Date.now(),
-                    url: url ? url : undefined
-                }]
-            });
-
-            context.sendReply({ content: "Prontinho! Atividade alterada com sucesso!", flags: 64 });
-            break;
-        }
-
         case "add": {
             const userData = await bot.database.getUser(user.id);
             if (userData.isBanned) {
