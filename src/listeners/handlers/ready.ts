@@ -8,7 +8,7 @@ const setReadyEvent = (): void => {
         
         bot.helpers.editBotStatus({
             activities: [{
-                name: ":D",
+                name: "Who can it be now? 🎶",
                 createdAt: Date.now(),
                 type: ActivityTypes.Game
             }],
