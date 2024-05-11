@@ -75,11 +75,52 @@ export default async function FoxyToolsExecutor(context: ChatInputInteractionCon
 
             context.sendReply({
                 content: `Usuário ${user.username} banido com sucesso!`,
-                flags: 64
             });
             return endCommand();
         }
 
+        case "get_user": {
+            const user = context.getOption<User>('user', 'users')!!;
+            const userData = await bot.database.getUser(user.id);
+
+            context.sendReply({
+                embeds: [{
+                    title: `Informações sobre ${user.username}`,
+                    fields: [
+                        {
+                            name: "ID",
+                            value: user.id.toString(),
+                        },
+                        {
+                            name: "Cakes",
+                            value: userData.userCakes.balance.toLocaleString('pt-BR'),
+                        },
+                        {
+                            name: "Banido",
+                            value: userData.isBanned ? "Sim" : "Não",
+                        },
+                        {
+                            name: "Motivo do banimento",
+                            value: userData.banReason ? userData.banReason : "Não definido",
+                        },
+                        {
+                            name: "Data do banimento",
+                            value: userData.banDate ? new Date(userData.banDate).toLocaleString() : "Não definido",
+                        },
+                        {
+                            name: "Backgrounds",
+                            value: userData.userProfile.backgroundList.map(bg => bg).join(", ") || "Nenhum background",
+                        },
+                        {
+                            name: "Decorations",
+                            value: userData.userProfile.decorationList.map(deco => deco).join(", ") || "Nenhuma decoração",
+                        }
+                    ]
+
+                }]
+            })
+            break;
+        }
         case "change_activity": {
             const activity = context.getOption<string>('text', false);
             const status = context.getOption<string>('status', false);
@@ -97,7 +138,7 @@ export default async function FoxyToolsExecutor(context: ChatInputInteractionCon
                 "url": url ?? null,
                 "type": type
             });
-        
+
             context.sendReply({
                 content: "Prontinho! Atividade alterada com sucesso!",
                 flags: 64
@@ -121,8 +162,7 @@ export default async function FoxyToolsExecutor(context: ChatInputInteractionCon
             userData.save().catch(err => console.log(err));
 
             context.sendReply({
-                content: `Usuário ${user.username} desbanido com sucesso!`,
-                flags: 64
+                content: `O banimento de ${user.username} foi removido com sucesso!`,
             });
             return endCommand();
         }
@@ -153,8 +193,7 @@ export default async function FoxyToolsExecutor(context: ChatInputInteractionCon
             });
 
             context.sendReply({
-                embeds: [embed],
-                flags: 64
+                embeds: [embed]
             });
 
             return endCommand();

@@ -28,6 +28,19 @@ const FoxyToolsCommand = createCommand({
             ]
         },
         {
+            name: "get_user",
+            description: "Pega informações de um usuário",
+            type: ApplicationCommandOptionTypes.SubCommand,
+            options: [
+                {
+                    name: "user",
+                    description: "O usuário que você quer pegar as informações",
+                    type: ApplicationCommandOptionTypes.User,
+                    required: true
+                }
+            ]
+        },
+        {
             name: "remove_cakes",
             description: "Remove Cakes para algum usuário",
             type: ApplicationCommandOptionTypes.SubCommand,
