@@ -70,7 +70,7 @@ export default async function FoxyToolsExecutor(context: ChatInputInteractionCon
             const reason = context.getOption<string>("reason", false)
             userData.isBanned = true;
             userData.banReason = reason;
-            userData.banData = Date.now();
+            userData.banDate = Date.now();
             userData.save().catch(err => console.log(err));
 
             context.sendReply({
@@ -117,7 +117,7 @@ export default async function FoxyToolsExecutor(context: ChatInputInteractionCon
 
             userData.isBanned = false;
             userData.banReason = null;
-            userData.banData = null;
+            userData.banDate = null;
             userData.save().catch(err => console.log(err));
 
             context.sendReply({
@@ -147,7 +147,7 @@ export default async function FoxyToolsExecutor(context: ChatInputInteractionCon
                     },
                     {
                         name: "Data do banimento",
-                        value: userData.banData ? new Date(userData.banData).toLocaleString() : "Não definido",
+                        value: userData.banDate ? new Date(userData.banDate).toLocaleString() : "Não definido",
                     }
                 ]
             });
