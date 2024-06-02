@@ -15,7 +15,6 @@ const SendFanartButton = async (context: ComponentInteractionContext) => {
             content: context.makeReply("1070906796274888795", `Seu ticket foi criado em <#${thread.id}>!`)
         });
         bot.helpers.sendMessage(thread.id, {
-            content: `<@!${context.interaction.user.id}>`,
             embeds: [{
                 title: ":paintbrush: | Envie sua fanart aqui!",
                 description: "A equipe de avaliação já foi notificada e irá avaliar sua fanart em breve!",
