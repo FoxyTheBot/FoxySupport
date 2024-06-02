@@ -1,20 +1,12 @@
-import { createBot, Intents, startBot } from 'discordeno';
-import { setupFoxy, setupInternals } from './structures/client/FoxyClient';
+import { startBot } from 'discordeno';
+import FoxyInstance from './structures/client/FoxyClient';
 import { FoxyClient } from './structures/types/foxy';
 import { logger } from './utils/logger';
 import { enableCachePlugin } from 'discordeno/cache-plugin'
 import { setupEventsHandler } from './listeners';
-import config from '../config.json';
 
-const bot = createBot({
-    token: config.token,
-    intents: 37379 as Intents,
-    botId: BigInt(config.clientId),
-}) as FoxyClient;
-
+const bot = new FoxyInstance().bot as FoxyClient;
 enableCachePlugin(bot);
-setupFoxy(bot);
-setupInternals(bot);
 setupEventsHandler();
 startBot(bot);
 
