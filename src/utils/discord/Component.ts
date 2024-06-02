@@ -11,10 +11,11 @@ type PropertyOptional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
 const createCustomId = (
     executorIndex: number,
-    target: BigString,
-    commandId: BigString,
+    target: string,
+    commandId: BigInt,
     ...data: unknown[]
-): string => `${executorIndex}|${target}|${commandId}|${data.join('|')}`;
+  ): string => `${executorIndex}|${target}|${commandId}|${data.join('|')}`;
+  
 
 const resolveSeparatedStrings = (string: string): string[] => string.split(' | ');
 
