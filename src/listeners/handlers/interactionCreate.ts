@@ -9,7 +9,6 @@ const setInteractionCreateEvent = (): void => {
     bot.events.interactionCreate = async (_, interaction) => {
         const command = bot.commands.get(interaction.data?.name);
         const context = new ChatInputInteractionContext(interaction);
-
         if (interaction.type === InteractionTypes.MessageComponent || interaction.type === InteractionTypes.ModalSubmit) {
             componentExecutor(interaction);
             return;
