@@ -12,6 +12,7 @@ export default class DatabaseConnection {
     public user: any;
     public commands: any;
     public guilds: any;
+    public staff: any;
     public riotAccount: any;
     public backgrounds: any;
 
@@ -25,6 +26,7 @@ export default class DatabaseConnection {
         this.user = mongoose.model('user', Schemas.userSchema);
         this.commands = mongoose.model('commands', Schemas.commandsSchema);
         this.guilds = mongoose.model('guilds', Schemas.guildSchema);
+        this.staff = mongoose.model('staff', Schemas.staffSchema);
         this.key = mongoose.model('key', Schemas.keySchema);
         this.backgrounds = mongoose.model('backgrounds', Schemas.backgroundSchema);
         this.riotAccount = mongoose.model('riotAccount', Schemas.riotAccountSchema);
@@ -91,7 +93,10 @@ export default class DatabaseConnection {
                     isPrivate: false,
                     region: null
                 },
-                premiumKeys: []
+                premiumKeys: [],
+                roulette: {
+                    availableSpins: 5,
+                }
             }).save();
         }
 
@@ -220,5 +225,19 @@ export default class DatabaseConnection {
     async getBackground(backgroundId: string): Promise<any> {
         let background = await this.backgrounds.findOne({ id: backgroundId });
         return background;
+    }
+
+    async getStaff(userId: BigInt) {
+        let document = await this.staff.findOne({ _id: userId.toString() });
+        if (!document) {
+            document = new this.staff({
+                _id: userId,
+                messagesSent: 0,
+                isDemoted: false,
+                lastMessage: null
+            }).save();
+        }
+
+        return document;
     }
 }

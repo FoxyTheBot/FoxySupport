@@ -74,7 +74,10 @@ const userSchema = new mongoose.Schema({
         isPrivate: Boolean,
         region: String
     },
-    premiumKeys: [keySchema]
+    premiumKeys: [keySchema],
+    roulette: {
+        availableSpins: Number,
+    }
 }, { versionKey: false, id: false });
 
 const riotAccountSchema = new mongoose.Schema({
@@ -124,6 +127,13 @@ const guildSchema = new mongoose.Schema({
 
 /* End of guild related schemas */
 
+/* Staff related */
+const staffSchema = new mongoose.Schema({
+    _id: String,
+    sentMessages: Number,
+    lastMessage: Date,
+    isDemoted: Boolean,
+})
 /* Bot related schemas */
 
 const commandsSchema = new mongoose.Schema({
@@ -149,6 +159,7 @@ export const Schemas = {
     userSchema,
     guildSchema,
     commandsSchema,
+    staffSchema,
     backgroundSchema,
     riotAccountSchema,
     keySchema,
