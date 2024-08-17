@@ -2,6 +2,7 @@ import { ButtonStyles, MessageComponentTypes } from "discordeno/types";
 import ComponentInteractionContext from "../../structures/ComponentInteractionContext";
 import { createCustomId } from "../../../utils/discord/Component";
 import { bot } from "../../..";
+import { ButtonExecutor } from "../../../structures/types/buttons";
 
 const AssignThread = async (context: ComponentInteractionContext) => {
     const [threadId] = context.sentData;
@@ -11,8 +12,8 @@ const AssignThread = async (context: ComponentInteractionContext) => {
             components: [{
                 type: MessageComponentTypes.Button,
                 style: ButtonStyles.Primary,
-                label: "Avaliar",
-                customId: createCustomId(2, "global", context.commandId, context.interaction.user.id, threadId),
+                label: "Assumir Ticket",
+                customId: createCustomId(ButtonExecutor.ASSUME_TICKET, "global", context.commandId, context.interaction.user.id, threadId),
                 disabled: true
             }]
         }]

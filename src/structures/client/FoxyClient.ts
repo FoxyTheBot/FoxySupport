@@ -5,9 +5,9 @@ import { transformInteraction } from '../internals/transformers/interactionRespo
 import { botHasGuildPermissions } from 'discordeno/permissions-plugin';
 import DatabaseConnection from '../database/DatabaseConnection';
 import config from '../../../config.json';
-import SendFanartButton from '../../command/global/components/SendFanartButton';
-import RateFanartButton from '../../command/global/components/RateFanartButton';
 import AssignThread from '../../command/global/components/AssignThreadButton';
+import OpenThreadButton from '../../command/global/components/OpenThreadButton';
+import CloseThreadButton from '../../command/global/components/CloseThreadButton';
 
 export default class FoxySupportInstance {
     public bot: FoxyClient;
@@ -34,7 +34,7 @@ export default class FoxySupportInstance {
         this.bot.commands = new Collection();
         this.bot.database = new DatabaseConnection(this.bot);
         this.bot.hasGuildPermission = botHasGuildPermissions;
-        this.bot.globalExecutions = [SendFanartButton, RateFanartButton, AssignThread];
+        this.bot.globalExecutions = [OpenThreadButton, CloseThreadButton, AssignThread];
     }
 
     private async setupInternals(): Promise<void> {
