@@ -133,7 +133,7 @@ export default async function FoxyToolsExecutor(context: ChatInputInteractionCon
                 }
             })
             api.post(`/status/update`, {
-                "name": activity,
+                "name": `${activity} | foxybot.win`,
                 "status": status,
                 "url": url ?? null,
                 "type": type
