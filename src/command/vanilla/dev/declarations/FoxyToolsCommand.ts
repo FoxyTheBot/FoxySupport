@@ -65,59 +65,79 @@ const FoxyToolsCommand = createCommand({
             type: ApplicationCommandOptionTypes.SubCommand,
             options: [{
                 name: "type",
-                description: "O tipo de atividade que você quer",
+                description: "O tipo de atividade que será exibida nos status da Foxy (STREAMING requer uma URL)",
                 type: ApplicationCommandOptionTypes.Number,
                 required: true,
                 choices: [{
-                    name: "Playing",
+                    name: "PLAYING",
                     value: 0
                 }, {
-                    name: "Streaming",
+                    name: "STREAMING",
                     value: 1
                 }, {
-                    name: "Listening",
+                    name: "LISTENING",
                     value: 2
                 }, {
-                    name: "Watching",
+                    name: "WATCHING",
                     value: 3
                 },
                 {
-                    name: "Custom",
+                    name: "CUSTOM_STATUS",
                     value: 4
                 },
                 {
-                    name: "Competing",
+                    name: "COMPETING",
                     value: 5
                 }]
             },
             {
                 name: "status",
-                description: "O status que você quer",
+                description: "O status que será exibido nos status da Foxy (Invísivel não exibirá o texto da atividade)",
                 type: ApplicationCommandOptionTypes.String,
                 required: true,
                 choices: [{
-                    name: "Online",
+                    name: "ONLINE",
                     value: "online"
                 }, {
-                    name: "Idle",
+                    name: "IDLE",
                     value: "idle"
                 }, {
-                    name: "Do not disturb",
+                    name: "DO_NOT_DISTURB",
                     value: "dnd"
                 }, {
-                    name: "Invisible",
+                    name: "INVISIBLE",
                     value: "invisible"
                 }]
             },
             {
                 name: "text",
-                description: "O texto da atividade",
+                description: "O texto que será exibido nos status da Foxy",
                 type: ApplicationCommandOptionTypes.String,
                 required: true
             },
             {
+                name: "priority",
+                description: "Prioridade da atividade",
+                type: ApplicationCommandOptionTypes.Number,
+                required: false,
+                choices: [{
+                    name: "NORMAL",
+                    value: 0
+                },
+                {
+                    name: "HIGH_PRIORITY",
+                    value: 1
+                }]
+            },
+            {
                 name: "url",
-                description: "A URL da atividade",
+                description: "A URL da atividade (apenas para STREAMING)",
+                type: ApplicationCommandOptionTypes.String,
+                required: false
+            },
+            {
+                name: "before_activity",
+                description: "Texto que será exibido antes do texto da atividade (Apenas se a prioridade for NORMAL)",
                 type: ApplicationCommandOptionTypes.String,
                 required: false
             }],

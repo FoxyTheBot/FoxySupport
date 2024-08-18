@@ -122,10 +122,17 @@ export default async function FoxyToolsExecutor(context: ChatInputInteractionCon
             break;
         }
         case "change_activity": {
-            const activity = context.getOption<string>('text', false);
+            let activity = context.getOption<string>('text', false);
             const status = context.getOption<string>('status', false);
             const url = context.getOption<string>('url', false);
             const type = context.getOption<number>('type', false);
+            const priority = context.getOption<number>('priority', false) ?? 0;
+            const beforeActivity = context.getOption<string>('before_activity', false) ?? "foxybot.win";
+    
+            if (priority !== 1) {
+                activity = `${activity} | ${beforeActivity}`;
+            }
+    
             const api = axios.create({
                 baseURL: config.api,
                 headers: {
@@ -133,12 +140,12 @@ export default async function FoxyToolsExecutor(context: ChatInputInteractionCon
                 }
             })
             api.post(`/status/update`, {
-                "name": `${activity} | foxybot.win`,
+                "name": activity,
                 "status": status,
                 "url": url ?? null,
                 "type": type
             });
-
+    
             context.sendReply({
                 content: "Prontinho! Atividade alterada com sucesso!",
                 flags: 64
