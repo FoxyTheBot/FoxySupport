@@ -147,7 +147,7 @@ export default async function FoxyToolsExecutor(context: ChatInputInteractionCon
             });
     
             context.sendReply({
-                content: "Prontinho! Atividade alterada com sucesso!",
+                content: context.makeReply("1070906796274888795", "Status alterado com sucesso!"),
                 flags: 64
             })
             return endCommand();
