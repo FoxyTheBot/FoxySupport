@@ -1,6 +1,7 @@
 import { ApplicationCommandOptionTypes } from "discordeno/types";
 import { createCommand } from "../../../structures/createCommand";
 import UpdateBackgroundExecutor from "../UpdateBackgroundExecutor";
+import AddBackgroundExecutor from "../AddBackgroundExecutor";
 
 const StoreManagerCommand = createCommand({
     name: "store",
@@ -51,6 +52,48 @@ const StoreManagerCommand = createCommand({
                 type: ApplicationCommandOptionTypes.Boolean,
                 required: false
             }]
+        },
+        {
+            name: "register",
+            description: "Registra um novo background",
+            type: ApplicationCommandOptionTypes.SubCommand,
+            options: [
+                {
+                    name: "id",
+                    description: "ID do background",
+                    type: ApplicationCommandOptionTypes.String,
+                    required: true
+                },
+                {
+                    name: "name",
+                    description: "Nome do background",
+                    type: ApplicationCommandOptionTypes.String,
+                    required: true
+                },
+                {
+                    name: "cakes",
+                    description: "Preço do background",
+                    type: ApplicationCommandOptionTypes.Number,
+                    required: true
+                },
+                {
+                    name: "description",
+                    description: "Descrição do background",
+                    type: ApplicationCommandOptionTypes.String,
+                    required: true
+                },
+                {
+                    name: "filename",
+                    description: "Nome do arquivo do background (NÃO INCLUIR A EXTENSÃO)",
+                    type: ApplicationCommandOptionTypes.String,
+                    required: true
+                },
+                {
+                    name: "author",
+                    description: "Autor do background",
+                    type: ApplicationCommandOptionTypes.String,
+                    required: false
+                }]
         }]
     }],
 
@@ -71,6 +114,11 @@ const StoreManagerCommand = createCommand({
                 switch (subCommand) {
                     case "update": {
                         UpdateBackgroundExecutor(context, endCommand);
+                        break;
+                    }
+
+                    case "register": {
+                        AddBackgroundExecutor(context, endCommand);
                         break;
                     }
                 }

@@ -227,6 +227,13 @@ export default class DatabaseConnection {
         return background;
     }
 
+    async registerBackground(data: Background): Promise<void> {
+        let background = await this.backgrounds.findOne({ id: data.id });
+        if (background) return null;
+
+        background = new this.backgrounds(data).save();
+    }
+
     async getStaff(userId: BigInt) {
         let document = await this.staff.findOne({ _id: userId.toString() });
         if (!document) {
