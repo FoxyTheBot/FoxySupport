@@ -36,7 +36,7 @@ const AddBackgroundExecutor = async (context: ChatInputInteractionContext, endCo
                     value: `${cakes} Cakes`
                 }],
                 image: {
-                    url: `https://cakey.foxybot.win/assets/backgrounds/${filename}.png`
+                    url: `https://cakey.foxybot.win/assets/backgrounds/${filename}`
                 }
             }],
             components: [createActionRow([createButton({
