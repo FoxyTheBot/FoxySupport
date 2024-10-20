@@ -4,6 +4,7 @@ import { botHasGuildPermissions } from 'discordeno/permissions-plugin';
 import { BotWithCache } from 'discordeno/cache-plugin';
 import DatabaseConnection from '../database/DatabaseConnection';
 import ComponentInteractionContext from '../../command/structures/ComponentInteractionContext';
+import MercadoPagoClient from '../../utils/MercadoPagoClient';
 export interface IdentifiedData<T> {
   id: number;
   data: T;
@@ -17,6 +18,7 @@ export interface FoxyClient extends BotWithCache<Bot> {
   isProduction: boolean;
   database: DatabaseConnection;
   config: Object;
+  mp: MercadoPagoClient
   locale: Function;
   isReady: boolean;
   hasGuildPermission: typeof botHasGuildPermissions;

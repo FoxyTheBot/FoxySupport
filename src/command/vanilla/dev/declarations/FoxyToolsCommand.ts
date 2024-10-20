@@ -41,6 +41,28 @@ const FoxyToolsCommand = createCommand({
             ]
         },
         {
+            name: "get_checkout",
+            description: "Pega informações de um checkout",
+            type: ApplicationCommandOptionTypes.SubCommand,
+            options: [{
+                name: "checkout",
+                description: "O ID do checkout que você quer pegar as informações",
+                type: ApplicationCommandOptionTypes.String,
+                required: true
+            }]
+        },
+        {
+            name: "get_payment",
+            description: "Pega informações de um pagamento",
+            type: ApplicationCommandOptionTypes.SubCommand,
+            options: [{
+                name: "payment",
+                description: "O ID do pagamento que você quer pegar as informações",
+                type: ApplicationCommandOptionTypes.String,
+                required: true
+            }]
+        },
+        {
             name: "remove_cakes",
             description: "Remove Cakes para algum usuário",
             type: ApplicationCommandOptionTypes.SubCommand,

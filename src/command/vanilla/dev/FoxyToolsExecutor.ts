@@ -4,6 +4,7 @@ import { User } from "discordeno/transformers";
 import { createEmbed } from "../../../utils/discord/Embed";
 import axios from "axios";
 import config from "../../../../config.json";
+import { MessageFlags } from "../../../utils/discord/Message";
 
 export default async function FoxyToolsExecutor(context: ChatInputInteractionContext, endCommand) {
     const command = context.getSubCommand();
@@ -121,6 +122,106 @@ export default async function FoxyToolsExecutor(context: ChatInputInteractionCon
             })
             break;
         }
+
+        case "get_checkout": {
+            const checkoutId = context.getOption<string>('checkout', false);
+            const checkoutInfo = await bot.database.getCheckout(checkoutId);
+            const itemInfo = await bot.database.getProductFromStore(checkoutInfo.itemId);
+
+            if (!checkoutInfo) {
+                context.sendReply({
+                    content: "Não foi possível encontrar a transação",
+                    flags: MessageFlags.EPHEMERAL
+                });
+                return endCommand();
+            }
+
+            const user = await bot.helpers.getUser(checkoutInfo.userId);
+
+            const embed = createEmbed({
+                title: "Informações sobre a transação",
+                fields: [
+                    {
+                        name: "ID da transação",
+                        value: `\`\`\`${checkoutInfo.checkoutId}\`\`\``,
+                    },
+                    {
+                        name: "ID do usuário",
+                        value: `\`\`\`${user.id}\`\`\``,
+                    },
+                    {
+                        name: "Item",
+                        value: await itemInfo.itemName,
+                    },
+                    {
+                        name: "Referência do pagamento",
+                        value: checkoutInfo.paymentId ?? "Não definido",
+                    },
+                    {
+                        name: "Pagamento aprovado",
+                        value: checkoutInfo.isApproved ? "Sim" : "Não",
+                    }]
+            });
+
+            context.sendReply({
+                embeds: [embed],
+                flags: MessageFlags.EPHEMERAL
+            });
+
+            break;
+        }
+
+        case "get_payment": {
+            const paymentInfo = await bot.mp.getPayment(context.getOption<string>('payment', false));
+            const embed = createEmbed({
+                title: "Informações sobre o pagamento",
+                fields: [
+                    {
+                        name: "ID do pagamento",
+                        value: paymentInfo.id.toString(),
+                        inline: true
+                    },
+                    {
+                        name: "Status",
+                        value: paymentInfo.status,
+                        inline: true
+                    },
+                    {
+                        name: "Método de pagamento",
+                        value: paymentInfo.payment_method_id,
+                        inline: true
+                    },
+                    {
+                        name: "Valor",
+                        value: paymentInfo.transaction_amount.toString() + " " + paymentInfo.currency_id,
+                        inline: true
+                    },
+                    {
+                        name: "Data",
+                        value: new Date(paymentInfo.date_created).toLocaleString(),
+                        inline: true
+                    },
+                    {
+                        name: "Descrição",
+                        value: paymentInfo.description,
+                        inline: true
+                    },
+                    {
+                        name: "ID do usuário",
+                        value: paymentInfo.external_reference,
+                        inline: true
+                    }
+                ]
+            });
+
+            context.sendReply({
+                embeds: [embed],
+                flags: MessageFlags.EPHEMERAL
+            });
+
+            break;
+        }
+
         case "change_activity": {
             let activity = context.getOption<string>('text', false);
             const status = context.getOption<string>('status', false);

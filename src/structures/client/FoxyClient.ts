@@ -8,6 +8,7 @@ import config from '../../../config.json';
 import AssignThread from '../../command/global/components/AssignThreadButton';
 import OpenThreadButton from '../../command/global/components/OpenThreadButton';
 import CloseThreadButton from '../../command/global/components/CloseThreadButton';
+import MercadoPagoClient from '../../utils/MercadoPagoClient';
 
 export default class FoxySupportInstance {
     public bot: FoxyClient;
@@ -31,6 +32,7 @@ export default class FoxySupportInstance {
 
     private async setupDefinitions(): Promise<void> {
         this.bot.clientId = BigInt(config.clientId);
+        this.bot.mp = new MercadoPagoClient(config.mercadopago.authToken);
         this.bot.commands = new Collection();
         this.bot.database = new DatabaseConnection(this.bot);
         this.bot.hasGuildPermission = botHasGuildPermissions;

@@ -5,6 +5,8 @@ import { bot } from '../../index';
 import { User } from 'discordeno/transformers';
 import { FoxyClient } from '../types/foxy';
 import { Schemas } from './schemas/Schemas';
+import { Checkout } from '../types/checkout';
+import { Item } from '../types/item';
 
 export default class DatabaseConnection {
     public client: FoxyClient;
@@ -15,6 +17,8 @@ export default class DatabaseConnection {
     public staff: any;
     public riotAccount: any;
     public backgrounds: any;
+    public checkoutList: any;
+    public items: any;
 
     constructor(client) {
         mongoose.set("strictQuery", true)
@@ -26,10 +30,11 @@ export default class DatabaseConnection {
         this.user = mongoose.model('user', Schemas.userSchema);
         this.commands = mongoose.model('commands', Schemas.commandsSchema);
         this.guilds = mongoose.model('guilds', Schemas.guildSchema);
-        this.staff = mongoose.model('staff', Schemas.staffSchema);
         this.key = mongoose.model('key', Schemas.keySchema);
         this.backgrounds = mongoose.model('backgrounds', Schemas.backgroundSchema);
         this.riotAccount = mongoose.model('riotAccount', Schemas.riotAccountSchema);
+        this.items = mongoose.model('storeItems', Schemas.storeSchema);
+        this.checkoutList = mongoose.model('checkoutList', Schemas.checkoutList);
         this.client = client;
     }
 
@@ -212,6 +217,16 @@ export default class DatabaseConnection {
         return usersData.map(user => user.toJSON());
     }
 
+    async getProductFromStore(productId: string): Promise<Item> {
+        let document = await this.items.findOne({ itemId: productId });
+        return document;
+    }
+
+    async getCheckout(checkoutId: string): Promise<Checkout | null> {
+        let checkout = await this.checkoutList.findOne({ checkoutId: checkoutId });
+        return checkout ?? null;
+    }
+
     async getAllGuilds(): Promise<void> {
         let guildsData = await this.guilds.find({});
         return guildsData.length;
@@ -232,19 +247,5 @@ export default class DatabaseConnection {
         if (background) return null;
 
         background = new this.backgrounds(data).save();
-    }
-
-    async getStaff(userId: BigInt) {
-        let document = await this.staff.findOne({ _id: userId.toString() });
-        if (!document) {
-            document = new this.staff({
-                _id: userId,
-                messagesSent: 0,
-                isDemoted: false,
-                lastMessage: null
-            }).save();
-        }
-
-        return document;
     }
 }

@@ -85,6 +85,15 @@ const riotAccountSchema = new mongoose.Schema({
     authCode: String,
 });
 
+const checkoutList = new mongoose.Schema({
+    checkoutId: String,
+    userId: String,
+    itemId: String,
+    date: Date,
+    isApproved: Boolean,
+    paymentId: String,
+}, { versionKey: false, id: false });
+
 /* End of user related schemas */
 
 /* Guild related schemas */
@@ -155,6 +164,15 @@ const backgroundSchema = new mongoose.Schema({
     inactive: Boolean,
 }, { versionKey: false, id: false } );
 
+const storeSchema = new mongoose.Schema({
+    itemId: String,
+    itemName: String,
+    price: Number,
+    description: String,
+    isSubscription: Boolean,
+    quantity: Number,
+});
+
 export const Schemas = {
     userSchema,
     guildSchema,
@@ -163,6 +181,8 @@ export const Schemas = {
     backgroundSchema,
     riotAccountSchema,
     keySchema,
+    checkoutList,
+    storeSchema
 };
 
 /* End of bot related schemas */
