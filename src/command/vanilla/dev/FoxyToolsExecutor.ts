@@ -211,7 +211,11 @@ export default async function FoxyToolsExecutor(context: ChatInputInteractionCon
                         value: paymentInfo.external_reference,
                         inline: true
                     }
-                ]
+                ],
+
+                footer: {
+                    text: "Informações fornecidas pela API do Mercado Pago"
+                }
             });
 
             context.sendReply({
