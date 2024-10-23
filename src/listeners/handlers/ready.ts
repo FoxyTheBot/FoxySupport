@@ -12,7 +12,7 @@ const setReadyEvent = (): void => {
                 type: ActivityTypes.Game
             }],
             status: "online"
-        })
+        });
     }
 }
 

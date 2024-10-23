@@ -23,6 +23,8 @@ const componentExecutor = async (interaction: Interaction): Promise<void> => {
 
   const [executorIndex, interactionTarget, commandId, ...data] = interaction.data.customId.split('|');
 
+  if (interactionTarget === "global" && interaction.guildId.toString() !== bot.config.devGuildId) return;
+  
   if (interactionTarget !== "global" && interactionTarget !== `${interaction.user.id}`)
     return errorReply("Você não pode apertar esse botão");
 

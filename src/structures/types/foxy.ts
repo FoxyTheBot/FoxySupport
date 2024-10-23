@@ -17,10 +17,29 @@ export interface FoxyClient extends BotWithCache<Bot> {
   username: string;
   isProduction: boolean;
   database: DatabaseConnection;
-  config: Object;
+  config: Config;
   mp: MercadoPagoClient
   locale: Function;
   isReady: boolean;
   hasGuildPermission: typeof botHasGuildPermissions;
   globalExecutions: ((context: ComponentInteractionContext<any>) => Promise<unknown>)[];
+}
+
+export interface Config {
+  clientId: string;
+  token: string;
+  mongouri: string;
+  mercadopago: {
+    authToken: string;
+  }
+  webhooks: {
+    event_log: {
+      id: string;
+      token: string;
+    }
+  }
+  devGuildId: string;
+  valorantAPI: string;
+  authorization: string;
+  api: string;
 }

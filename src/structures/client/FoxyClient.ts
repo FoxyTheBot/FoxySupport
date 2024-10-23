@@ -34,6 +34,7 @@ export default class FoxySupportInstance {
         this.bot.clientId = BigInt(config.clientId);
         this.bot.mp = new MercadoPagoClient(config.mercadopago.authToken);
         this.bot.commands = new Collection();
+        this.bot.config = config;
         this.bot.database = new DatabaseConnection(this.bot);
         this.bot.hasGuildPermission = botHasGuildPermissions;
         this.bot.globalExecutions = [OpenThreadButton, CloseThreadButton, AssignThread];

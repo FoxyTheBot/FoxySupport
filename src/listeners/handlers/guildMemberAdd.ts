@@ -5,6 +5,7 @@ import { getUserAvatar } from "../../utils/discord/User";
 
 const setGuildMemberAddEvent = async (): Promise<void> => {
     bot.events.guildMemberAdd = async (_, member, user) => {
+        if (member.guildId.toString() !== bot.config.devGuildId) return;
         if (user.toggles.bot) return;
 
         const embed = createEmbed({
