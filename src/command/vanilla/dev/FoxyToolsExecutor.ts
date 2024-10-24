@@ -5,6 +5,8 @@ import { createEmbed } from "../../../utils/discord/Embed";
 import axios from "axios";
 import config from "../../../../config.json";
 import { MessageFlags } from "../../../utils/discord/Message";
+import { createActionRow, createButton, createCustomId } from "../../../utils/discord/Component";
+import { ButtonStyles } from "discordeno/types";
 
 export default async function FoxyToolsExecutor(context: ChatInputInteractionContext, endCommand) {
     const command = context.getSubCommand();
@@ -91,33 +93,39 @@ export default async function FoxyToolsExecutor(context: ChatInputInteractionCon
                         {
                             name: "ID",
                             value: user.id.toString(),
+                            inline: true
                         },
                         {
                             name: "Cakes",
                             value: userData.userCakes.balance.toLocaleString('pt-BR'),
+                            inline: true
                         },
                         {
                             name: "Banido",
                             value: userData.isBanned ? "Sim" : "Não",
+                            inline: true
                         },
                         {
                             name: "Motivo do banimento",
                             value: userData.banReason ? userData.banReason : "Não definido",
+                            inline: true
                         },
                         {
                             name: "Data do banimento",
                             value: userData.banDate ? new Date(userData.banDate).toLocaleString() : "Não definido",
+                            inline: true
                         },
                         {
-                            name: "Backgrounds",
-                            value: userData.userProfile.backgroundList.map(bg => bg).join(", ") || "Nenhum background",
+                            name: "Expiração do premium",
+                            value: userData.userPremium.premiumDate ? new Date(userData.userPremium.premiumDate).toLocaleString() : "Não definido",
+                            inline: true
                         },
                         {
-                            name: "Decorations",
-                            value: userData.userProfile.decorationList.map(deco => deco).join(", ") || "Nenhuma decoração",
+                            name: "Último premium",
+                            value: userData.userPremium.premiumType ? userData.userPremium.premiumType : "Não definido",
+                            inline: true
                         }
                     ]
-
                 }]
             })
             break;
