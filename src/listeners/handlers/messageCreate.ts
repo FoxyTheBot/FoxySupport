@@ -40,8 +40,8 @@ const setMessageCreateEvent = (): void => {
         if (message.isFromBot
             || !message.guildId
             || !message.member?.premiumSince) return;
-        logger.info(`Usuário ${message.authorId} impulsionou o servidor ${message.guildId}!`);
-        try {
+
+            try {
             const userInfo = await bot.database.getUser(message.authorId);
             if (userInfo.userPremium.premium) return;
             
@@ -51,7 +51,7 @@ const setMessageCreateEvent = (): void => {
                 premiumType: PREMIUM_TYPE,
             };
             await userInfo.save();
-
+            logger.info(`Usuário ${message.authorId} impulsionou o servidor!`);
             await sendUserDM(message.authorId.toString());
         } catch (error) {
             logger.error(`Erro ao enviar DM para ${message.authorId}. DM fechada?`, error);

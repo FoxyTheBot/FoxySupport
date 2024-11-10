@@ -1,29 +1,11 @@
 import { DiscordChannel } from "discordeno/types";
 import { bot } from "../..";
 import { createEmbed } from "../../utils/discord/Embed";
-import { getUserAvatar } from "../../utils/discord/User";
 
 const setGuildMemberAddEvent = async (): Promise<void> => {
     bot.events.guildMemberAdd = async (_, member, user) => {
         if (member.guildId.toString() !== bot.config.devGuildId) return;
         if (user.toggles.bot) return;
-
-        const embed = createEmbed({
-            title: "<:foxy_wow:853366914054881310> Bem-Vindo(a) a Cafeteria da Foxy!",
-            description: `Olá, ${user.username}! ` +
-                "Bem-Vindo(a) a Cafeteria da Foxy! Caso " +
-                "tenha dúvidas fique a vontade para ir em <#1065999538332119131>, caso tenha alguma sugestão ou bug " +
-                "vá para <#1065996156208947220>!",
-            thumbnail: {
-                url: getUserAvatar(user, { size: 2048, enableGif: true })
-            }
-        });
-
-        const channel = await bot.helpers.getChannel("1067208168301666444");
-        bot.helpers.sendMessage(channel.id, {
-            content: `<@!${user.id}>`,
-            embeds: [embed] 
-        });
 
         setTimeout(async () => {
             const userInfo = await bot.helpers.getUser(user.id);
