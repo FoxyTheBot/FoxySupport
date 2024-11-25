@@ -4,6 +4,7 @@ import ComponentInteractionContext from "../../structures/ComponentInteractionCo
 import { createCustomId } from "../../../utils/discord/Component";
 import { colors } from "../../../utils/colors";
 import { ButtonExecutor } from "../../../structures/types/buttons";
+import { emotes } from "../../../structures/emotes";
 
 const THREAD_SETTINGS = {
     fanart: {
@@ -37,7 +38,14 @@ const THREAD_SETTINGS = {
             footer: { text: "A equipe foi notificada e irá responder em breve! Tenha paciência." }
         },
         buttons: [
-            { style: ButtonStyles.Danger, label: "Fechar Ticket", accepted: null }
+            {
+                style: ButtonStyles.Danger, 
+                label: "Fechar Ticket",
+                emoji: {
+                    id: BigInt(emotes.FOXY_CUPCAKE)
+                },
+                accepted: null
+            }
         ],
         notificationEmbed: {
             title: "Novo ticket aberto!",
@@ -73,6 +81,7 @@ const OpenThreadButton = async (context: ComponentInteractionContext) => {
                 type: MessageComponentTypes.Button,
                 style: button.style,
                 label: button.label,
+                emoji: button.emoji ? { id: button.emoji.id } : undefined,
                 customId: createCustomId(ButtonExecutor.CLOSE_TICKET, "global", context.commandId, context.interaction.user.id, button.accepted, thread.id, type)
             }))
         }]
@@ -93,6 +102,9 @@ const OpenThreadButton = async (context: ComponentInteractionContext) => {
                     type: MessageComponentTypes.Button,
                     style: ButtonStyles.Primary,
                     label: "Assumir Ticket",
+                    emoji: {
+                        id: BigInt(emotes.FOXY_YAY)
+                    },
                     customId: createCustomId(ButtonExecutor.ASSUME_TICKET, "global", context.commandId, thread.id),
                 }]
             }]

@@ -3,6 +3,7 @@ import ComponentInteractionContext from "../../structures/ComponentInteractionCo
 import { createCustomId } from "../../../utils/discord/Component";
 import { bot } from "../../..";
 import { ButtonExecutor } from "../../../structures/types/buttons";
+import { emotes } from "../../../structures/emotes";
 
 const AssignThread = async (context: ComponentInteractionContext) => {
     const [threadId] = context.sentData;
@@ -13,6 +14,9 @@ const AssignThread = async (context: ComponentInteractionContext) => {
                 type: MessageComponentTypes.Button,
                 style: ButtonStyles.Primary,
                 label: "Assumir Ticket",
+                emoji: {
+                    id: BigInt(emotes.FOXY_CUPCAKE)
+                },
                 customId: createCustomId(ButtonExecutor.ASSUME_TICKET, "global", context.commandId, context.interaction.user.id, threadId),
                 disabled: true
             }]

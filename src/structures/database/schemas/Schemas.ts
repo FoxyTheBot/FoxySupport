@@ -162,6 +162,10 @@ const backgroundSchema = new mongoose.Schema({
     description: String,
     author: String,
     inactive: Boolean,
+    releaseDate: Date,
+    limitedEdition: Boolean,
+    rarity: String,
+    collection: String
 }, { versionKey: false, id: false } );
 
 const storeSchema = new mongoose.Schema({

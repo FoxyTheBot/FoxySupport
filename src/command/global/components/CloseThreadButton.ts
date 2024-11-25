@@ -3,8 +3,8 @@ import { bot } from "../../..";
 import { colors } from "../../../utils/colors";
 import { createCustomId } from "../../../utils/discord/Component";
 import ComponentInteractionContext from "../../structures/ComponentInteractionContext";
-import { ButtonExecutor } from "../../../structures/types/buttons";
 import { MessageFlags } from "../../../utils/discord/Message";
+import { emotes } from "../../../structures/emotes";
 
 const CloseThreadButton = async (context: ComponentInteractionContext) => {
     const [userId, isAccepted, threadId, type] = context.sentData;
@@ -41,6 +41,9 @@ const CloseThreadButton = async (context: ComponentInteractionContext) => {
                         type: MessageComponentTypes.Button,
                         style: ButtonStyles.Success,
                         label: "Aceitar",
+                        emoji: {
+                            id: BigInt(emotes.FOXY_YAY)
+                        },
                         customId: createCustomId(1, "global", context.commandId, context.interaction.user.id, true),
                         disabled: true
                     },
@@ -48,6 +51,9 @@ const CloseThreadButton = async (context: ComponentInteractionContext) => {
                         type: MessageComponentTypes.Button,
                         style: ButtonStyles.Danger,
                         label: "Recusar",
+                        emoji: {
+                            id: BigInt(emotes.FOXY_PLUSHIE)
+                        },
                         customId: createCustomId(1, "global", context.commandId, context.interaction.user.id, false),
                         disabled: true
                     }]
@@ -68,6 +74,9 @@ const CloseThreadButton = async (context: ComponentInteractionContext) => {
                     type: MessageComponentTypes.Button,
                     style: ButtonStyles.Danger,
                     label: "Fechar Ticket",
+                    emoji: {
+                        id: BigInt(emotes.FOXY_PLUSHIE)
+                    },
                     customId: createCustomId(1, "global", context.commandId, context.interaction.user.id, null, threadId, "help"),
                     disabled: true
                 }]

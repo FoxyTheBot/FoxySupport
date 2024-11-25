@@ -8,6 +8,9 @@ const UpdateBackgroundExecutor = async (context: ChatInputInteractionContext, en
     const description = context.getOption<string>('description', false) ?? null;
     const author = context.getOption<string>('author', false) ?? null;
     const inactive = context.getOption<boolean>('inactive', false) ?? null;
+    const filename = context.getOption<string>('filename', false) ?? null;
+    const limitedEdition = context.getOption<boolean>('limitededition', false) ?? null;
+    const rarity = context.getOption<string>('rarity', false) ?? null;
 
     const background = await bot.database.getBackground(id);
 
@@ -24,7 +27,10 @@ const UpdateBackgroundExecutor = async (context: ChatInputInteractionContext, en
     if (description) background.description = description;
     if (author) background.author = author;
     if (inactive) background.inactive = inactive;
-
+    if (filename) background.filename = filename;
+    if (limitedEdition) background.limitedEdition = limitedEdition;
+    if (rarity) background.rarity = rarity;
+    
     background.save().catch(err => console.log(err));
     
     context.sendReply({

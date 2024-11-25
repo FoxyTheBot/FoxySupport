@@ -6,4 +6,8 @@ interface Background {
     description: string,
     author: string,
     inactive: boolean,
+    releaseDate: Date,
+    limitedEdition: boolean,
+    rarity: string,
+    collection: string
 }

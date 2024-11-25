@@ -42,69 +42,8 @@ export default class DatabaseConnection {
         if (!userId) null;
         const user: User = await bot.helpers.getUser(String(userId));
         let document = await this.user.findOne({ _id: user.id });
-
-        if (!document) {
-            document = new this.user({
-                _id: user.id,
-                userCreationTimestamp: new Date(),
-                isBanned: false,
-                banDate: null,
-                banReason: null,
-                userCakes: {
-                    balance: 0,
-                    lastDaily: null,
-                },
-                marryStatus: {
-                    marriedWith: null,
-                    marriedDate: null,
-                    cantMarry: false,
-                },
-                userProfile: {
-                    decoration: null,
-                    decorationList: [],
-                    background: "default",
-                    backgroundList: ["default"],
-                    repCount: 0,
-                    lastRep: null,
-                    layout: "default",
-                    aboutme: null,
-                },
-                userPremium: {
-                    premium: false,
-                    premiumDate: null,
-                    premiumType: null,
-                },
-                userSettings: {
-                    language: 'pt-br'
-                },
-                petInfo: {
-                    name: null,
-                    type: null,
-                    rarity: null,
-                    level: 0,
-                    hungry: 100,
-                    happy: 100,
-                    health: 100,
-                    lastHungry: null,
-                    lastHappy: null,
-                    isDead: false,
-                    isClean: true,
-                    food: []
-                },
-                userTransactions: [],
-                riotAccount: {
-                    isLinked: false,
-                    puuid: null,
-                    isPrivate: false,
-                    region: null
-                },
-                premiumKeys: [],
-                roulette: {
-                    availableSpins: 5,
-                }
-            }).save();
-        }
-
+        
+        if (!document) return;
         return document;
     }
 

@@ -51,6 +51,50 @@ const StoreManagerCommand = createCommand({
                 description: "Se o background está inativo",
                 type: ApplicationCommandOptionTypes.Boolean,
                 required: false
+            },
+            {
+                name: "filename",
+                description: "Novo nome do arquivo do background (NÃO INCLUIR A EXTENSÃO)",
+                type: ApplicationCommandOptionTypes.String,
+                required: false
+            },
+            {
+                name: "collection",
+                description: "Nova coleção do background",
+                type: ApplicationCommandOptionTypes.String,
+                required: false
+            },
+            {
+                name: "rarity",
+                description: "Nova raridade do background",
+                type: ApplicationCommandOptionTypes.String,
+                required: false,
+                choices: [{
+                    name: "Comum",
+                    value: "COMMON"
+                },
+                {
+                    name: "Incomum",
+                    value: "UNCOMMON"
+                },
+                {
+                    name: "Raro",
+                    value: "RARE"
+                },
+                {
+                    name: "Épico",
+                    value: "EPIC"
+                },
+                {
+                    name: "Lendário",
+                    value: "LEGENDARY"
+                },
+            ]},
+            {
+                name: "limitededition",
+                description: "Se o background é de edição limitada",
+                type: ApplicationCommandOptionTypes.Boolean,
+                required: false
             }]
         },
         {
@@ -89,9 +133,47 @@ const StoreManagerCommand = createCommand({
                     required: true
                 },
                 {
+                    name: "collection",
+                    description: "Coleção do background",
+                    type: ApplicationCommandOptionTypes.String,
+                    required: true
+                },
+                {
+                    name: "rarity",
+                    description: "Raridade do background",
+                    type: ApplicationCommandOptionTypes.String,
+                    required: true,
+                    choices: [{
+                        name: "Comum",
+                        value: "COMMON"
+                    },
+                    {
+                        name: "Incomum",
+                        value: "UNCOMMON"
+                    },
+                    {
+                        name: "Raro",
+                        value: "RARE"
+                    },
+                    {
+                        name: "Épico",
+                        value: "EPIC"
+                    },
+                    {
+                        name: "Lendário",
+                        value: "LEGENDARY"
+                    }]
+                },
+                {
                     name: "author",
                     description: "Autor do background",
                     type: ApplicationCommandOptionTypes.String,
+                    required: false
+                },
+                {
+                    name: "limitededition",
+                    description: "Se o background é de edição limitada",
+                    type: ApplicationCommandOptionTypes.Boolean,
                     required: false
                 }]
         }]
