@@ -5,12 +5,11 @@ import { createEmbed } from "../../../utils/discord/Embed";
 import axios from "axios";
 import config from "../../../../config.json";
 import { MessageFlags } from "../../../utils/discord/Message";
-import { createActionRow, createButton, createCustomId } from "../../../utils/discord/Component";
-import { ButtonStyles } from "discordeno/types";
 
 export default async function FoxyToolsExecutor(context: ChatInputInteractionContext, endCommand) {
     const command = context.getSubCommand();
     const user = context.getOption<User>('user', 'users')!!;
+    context.sendDefer(true);
 
     if (!context.guildMember.roles.includes(768268280951472170n)) {
         context.sendReply({
