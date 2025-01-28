@@ -41,20 +41,30 @@ const setMessageCreateEvent = (): void => {
             || !message.guildId
             || !message.member?.premiumSince) return;
 
+        const guild = await bot.database.getFoxyVerseGuild(message.guildId.toString());
+        if (!guild) return logger.warn(`Unknown guild ${message.guildId}`);
+
+        if (guild.serverBenefits.givePremiumIfBoosted.isEnabled) {
+            if (guild.serverBenefits.givePremiumIfBoosted.textChannelToRedeem
+                && guild.serverBenefits.givePremiumIfBoosted.textChannelToRedeem !== message.channelId.toString()) return;
+
             try {
-            const userInfo = await bot.database.getUser(message.authorId);
-            if (userInfo.userPremium.premium) return;
-            
-            userInfo.userPremium = {
-                premium: true,
-                premiumDate: calculatePremiumDate(),
-                premiumType: PREMIUM_TYPE,
-            };
-            await userInfo.save();
-            logger.info(`Usuário ${message.authorId} impulsionou o servidor!`);
-            await sendUserDM(message.authorId.toString());
-        } catch (error) {
-            logger.error(`Erro ao enviar DM para ${message.authorId}. DM fechada?`, error);
+                const userInfo = await bot.database.getUser(message.authorId);
+                if (userInfo.userPremium.premium) return;
+
+                userInfo.userPremium = {
+                    premium: true,
+                    premiumDate: calculatePremiumDate(),
+                    premiumType: PREMIUM_TYPE,
+                };
+                await userInfo.save();
+                logger.info(`Usuário ${message.authorId} impulsionou o servidor!`);
+                if (guild.serverBenefits.givePremiumIfBoosted.notifyUser) {
+                    await sendUserDM(message.authorId.toString());
+                }
+            } catch (error) {
+                logger.error(`Erro ao enviar DM para ${message.authorId}. DM fechada?`, error);
+            }
         }
     };
 };

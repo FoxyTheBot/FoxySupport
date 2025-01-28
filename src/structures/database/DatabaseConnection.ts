@@ -7,6 +7,7 @@ import { FoxyClient } from '../types/foxy';
 import { Schemas } from './schemas/Schemas';
 import { Checkout } from '../types/checkout';
 import { Item } from '../types/item';
+import { FoxyVerseGuild } from '../types/guild';
 
 export default class DatabaseConnection {
     public client: FoxyClient;
@@ -19,6 +20,7 @@ export default class DatabaseConnection {
     public backgrounds: any;
     public checkoutList: any;
     public items: any;
+    public foxyVerse: any;
 
     constructor(client) {
         mongoose.set("strictQuery", true)
@@ -34,6 +36,7 @@ export default class DatabaseConnection {
         this.backgrounds = mongoose.model('backgrounds', Schemas.backgroundSchema);
         this.riotAccount = mongoose.model('riotAccount', Schemas.riotAccountSchema);
         this.items = mongoose.model('storeItems', Schemas.storeSchema);
+        this.foxyVerse = mongoose.model('foxyVerse', Schemas.foxyVerseSchema);
         this.checkoutList = mongoose.model('checkoutList', Schemas.checkoutList);
         this.client = client;
     }
@@ -85,76 +88,49 @@ export default class DatabaseConnection {
         return commandsData.map(command => command.toJSON());
     }
 
-    async getCode(code: string): Promise<any> {
-        const riotAccount = this.riotAccount.findOne({ authCode: code });
-        if (!riotAccount) return null;
-        return riotAccount;
-    }
+    async getFoxyVerseGuild(guildId: String): Promise<FoxyVerseGuild | null> {
+        let document = await this.foxyVerse.findOne({ _id: guildId });
+        if (!document) return null;
 
-    async getAllUsageCount(): Promise<Number> {
-        let commandsData = await this.commands.find({});
-        let usageCount = 0;
-        commandsData.map(command => usageCount += command.commandUsageCount);
-        return usageCount;
-
-    }
-
-    async getGuild(guildId: BigInt): Promise<any> {
-        let document = await this.guilds.findOne({ _id: guildId });
         return document;
     }
 
-    async addGuild(guildId: BigInt): Promise<any> {
-        let document = await this.guilds.findOne({ _id: guildId });
+    async getFoxyVerseGuildOrRegister(guildId: String, guildAdmin: String, guildInvite: String): Promise<FoxyVerseGuild> {
+        let document = await this.foxyVerse.findOne({ _id: guildId });
+        if (document) return document;
 
-        if (!document) {
-            document = new this.guilds({
-                _id: guildId,
-                GuildJoinLeaveModule: {
+        document = await this.registerFoxyVerseGuild(guildId, guildAdmin, guildInvite);
+        return document;
+    }
+
+    async registerFoxyVerseGuild(guildId: String, guildAdmin: String, guildInvite: String): Promise<FoxyVerseGuild> {
+        let document = await this.foxyVerse.findOne({ _id: guildId });
+        if (document) return null;
+
+        document = new this.foxyVerse({
+            _id: guildId,
+            serverBenefits: {
+                givePremiumIfBoosted: {
                     isEnabled: false,
-                    joinMessage: null,
-                    alertWhenUserLeaves: false,
-                    leaveMessage: null,
-                    joinChannel: null,
-                    leaveChannel: null,
-                },
-                valAutoRoleModule: {
-                    isEnabled: false,
-                    unratedRole: null,
-                    ironRole: null,
-                    bronzeRole: null,
-                    silverRole: null,
-                    goldRole: null,
-                    platinumRole: null,
-                    diamondRole: null,
-                    ascendantRole: null,
-                    immortalRole: null,
-                    radiantRole: null,
-                },
-                premiumKeys: []
-
-            }).save()
-        }
+                    notifyUser: false,
+                    textChannelToRedeem: null,
+                }
+            },
+            guildAdmins: [guildAdmin],
+            serverInvite: guildInvite,
+        }).save();
 
         return document;
     }
 
-    async removeGuild(guildId: BigInt): Promise<any> {
-        let document = await this.guilds.findOne({ _id: guildId });
+    async unregisterFoxyVerseGuild(guildId: String): Promise<boolean | null> {
+        let document = await this.foxyVerse.findOne({ _id: guildId });
+        if (!document) return null;
 
-        if (document) {
-            document.delete();
-        } else {
-            return null;
-        }
-
-        return document;
+        await document.deleteOne();
+        return true;
     }
 
-    async getAllUsers(): Promise<void> {
-        let usersData = await this.user.find({});
-        return usersData.map(user => user.toJSON());
-    }
 
     async getProductFromStore(productId: string): Promise<Item> {
         let document = await this.items.findOne({ itemId: productId });
@@ -164,16 +140,6 @@ export default class DatabaseConnection {
     async getCheckout(checkoutId: string): Promise<Checkout | null> {
         let checkout = await this.checkoutList.findOne({ checkoutId: checkoutId });
         return checkout ?? null;
-    }
-
-    async getAllGuilds(): Promise<void> {
-        let guildsData = await this.guilds.find({});
-        return guildsData.length;
-    }
-
-    async getAllBackgrounds(): Promise<Background[]> {
-        let backgroundsData = await this.backgrounds.find({});
-        return backgroundsData.map(background => background.toJSON());
     }
 
     async getBackground(backgroundId: string): Promise<any> {

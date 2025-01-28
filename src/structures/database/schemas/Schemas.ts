@@ -143,6 +143,20 @@ const staffSchema = new mongoose.Schema({
     lastMessage: Date,
     isDemoted: Boolean,
 })
+
+const foxyVerseSchema = new mongoose.Schema({
+    _id: String,
+    serverBenefits: {
+        givePremiumIfBoosted: {
+            isEnabled: Boolean,
+            notifyUser: Boolean,
+            textChannelToRedeem: String,
+        },
+    },
+    guildAdmins: Array,
+    serverInvite: String,
+
+}, { versionKey: false, id: false, _id: false });
 /* Bot related schemas */
 
 const commandsSchema = new mongoose.Schema({
@@ -186,7 +200,8 @@ export const Schemas = {
     riotAccountSchema,
     keySchema,
     checkoutList,
-    storeSchema
+    storeSchema,
+    foxyVerseSchema
 };
 
 /* End of bot related schemas */
