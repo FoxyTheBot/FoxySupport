@@ -29,12 +29,6 @@ const StoreManagerCommand = createCommand({
                 required: false
             },
             {
-                name: "cakes",
-                description: "Novo preço do background",
-                type: ApplicationCommandOptionTypes.Number,
-                required: false
-            },
-            {
                 name: "description",
                 description: "Nova descrição do background",
                 type: ApplicationCommandOptionTypes.String,
@@ -70,23 +64,23 @@ const StoreManagerCommand = createCommand({
                 type: ApplicationCommandOptionTypes.String,
                 required: false,
                 choices: [{
-                    name: "Comum",
+                    name: "Comum (5.000 Cakes)",
                     value: "COMMON"
                 },
                 {
-                    name: "Incomum",
+                    name: "Incomum (10.000 Cakes)",
                     value: "UNCOMMON"
                 },
                 {
-                    name: "Raro",
+                    name: "Raro (20.000 Cakes)",
                     value: "RARE"
                 },
                 {
-                    name: "Épico",
+                    name: "Épico (40.000 Cakes)",
                     value: "EPIC"
                 },
                 {
-                    name: "Lendário",
+                    name: "Lendário (80.000 Cakes)",
                     value: "LEGENDARY"
                 },
             ]},
@@ -115,12 +109,6 @@ const StoreManagerCommand = createCommand({
                     required: true
                 },
                 {
-                    name: "cakes",
-                    description: "Preço do background",
-                    type: ApplicationCommandOptionTypes.Number,
-                    required: true
-                },
-                {
                     name: "description",
                     description: "Descrição do background",
                     type: ApplicationCommandOptionTypes.String,
@@ -144,23 +132,23 @@ const StoreManagerCommand = createCommand({
                     type: ApplicationCommandOptionTypes.String,
                     required: true,
                     choices: [{
-                        name: "Comum",
+                        name: "Comum (5.000 Cakes)",
                         value: "COMMON"
                     },
                     {
-                        name: "Incomum",
+                        name: "Incomum (10.000 Cakes)",
                         value: "UNCOMMON"
                     },
                     {
-                        name: "Raro",
+                        name: "Raro (20.000 Cakes)",
                         value: "RARE"
                     },
                     {
-                        name: "Épico",
+                        name: "Épico (40.000 Cakes)",
                         value: "EPIC"
                     },
                     {
-                        name: "Lendário",
+                        name: "Lendário (80.000 Cakes)",
                         value: "LEGENDARY"
                     }]
                 },

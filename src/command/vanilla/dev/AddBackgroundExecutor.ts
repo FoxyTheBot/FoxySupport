@@ -7,13 +7,40 @@ import { emotes } from "../../../structures/emotes";
 const AddBackgroundExecutor = async (context: ChatInputInteractionContext, endCommand) => {
     const id = context.getOption<string>('id', false)!!;
     const name = context.getOption<string>('name', false);
-    const cakes = context.getOption<number>('cakes', false);
+    let cakes: number;
     const description = context.getOption<string>('description', false);
     const author = context.getOption<string>('author', false);
     const filename = context.getOption<string>('filename', false) + ".png";
     const limitedEdition = context.getOption<boolean>('limitededition', false) || false;
     const rarity = context.getOption<string>('rarity', false);
     const collection = context.getOption<string>('collection', false);
+
+    switch (rarity) {
+        case "COMMON": {
+            cakes = 5000;
+            break;
+        }
+
+        case "UNCOMMON": {
+            cakes = 10000;
+            break;
+        }
+
+        case "RARE": {
+            cakes = 20000;
+            break;
+        }
+
+        case "EPIC": {
+            cakes = 40000;
+            break;
+        }   
+
+        case "LEGENDARY": {
+            cakes = 80000;
+            break;
+        }   
+    }
 
     await bot.database.registerBackground({
         id,
@@ -42,7 +69,7 @@ const AddBackgroundExecutor = async (context: ChatInputInteractionContext, endCo
                 description: description,
                 fields: [{
                     name: "Preço",
-                    value: `${cakes} Cakes`,
+                    value: `${cakes.toLocaleString} Cakes`,
                     inline: true
                 },
                 {
