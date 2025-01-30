@@ -69,7 +69,7 @@ const AddBackgroundExecutor = async (context: ChatInputInteractionContext, endCo
                 description: description,
                 fields: [{
                     name: "Preço",
-                    value: `${cakes.toLocaleString} Cakes`,
+                    value: `${cakes.toLocaleString("pt-BR")} Cakes`,
                     inline: true
                 },
                 {
