@@ -5,6 +5,7 @@ import { createEmbed } from "../../../utils/discord/Embed";
 import axios from "axios";
 import config from "../../../../config.json";
 import { MessageFlags } from "../../../utils/discord/Message";
+import { colors } from "../../../utils/colors";
 
 export default async function FoxyToolsExecutor(context: ChatInputInteractionContext, endCommand) {
     const command = context.getSubCommand();
@@ -78,6 +79,26 @@ export default async function FoxyToolsExecutor(context: ChatInputInteractionCon
             context.sendReply({
                 content: `Usuário ${user.username} banido com sucesso!`,
             });
+
+            setTimeout(async () => {
+                await bot.helpers.sendMessage(config.channels.foxybanLog, {
+                    embeds: [{
+                        title: `${user.username} / ${user.id} foi banido!`,
+                        description: `Motivo: ${reason}`,
+                        color: colors.AQUA,
+                        fields: [{
+                            name: "Banido por",
+                            value: `${context.author.username} / ${context.author.id}`,
+                            inline: true
+                        },
+                        {
+                            name: "Data",
+                            value: new Date().toLocaleString(),
+                            inline: true
+                        }]
+                    }]
+                });
+            }, 1000);
             return endCommand();
         }
 
@@ -283,6 +304,26 @@ export default async function FoxyToolsExecutor(context: ChatInputInteractionCon
             context.sendReply({
                 content: `O banimento de ${user.username} foi removido com sucesso!`,
             });
+
+            setTimeout(async () => {
+                await bot.helpers.sendMessage(config.channels.foxybanLog, {
+                    embeds: [{
+                        title: `${user.username} / ${user.id} foi desbanido!`,
+                        color: colors.AQUA,
+                        fields: [{
+                            name: "Banimento removido por",
+                            value: `${context.author.username} / ${context.author.id}`,
+                            inline: true
+                        },
+                        {
+                            name: "Data",
+                            value: new Date().toLocaleString(),
+                            inline: true
+                        }]
+                    }]
+                });    
+            }, 1000);
+            
             return endCommand();
         }
 

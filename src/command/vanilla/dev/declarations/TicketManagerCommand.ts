@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionTypes, MessageComponentTypes } from "discordeno/types";
+import { ApplicationCommandOptionTypes } from "discordeno/types";
 import { createCommand } from "../../../structures/createCommand";
 import OpenThreadButton from "../../../global/components/OpenThreadButton";
 import TicketManagerExecutor from "../TicketManagerExecutor";
@@ -24,8 +24,9 @@ const TicketManagerCommand = createCommand({
                     name: "type",
                     description: "O tipo de mensagem a ser reenviada",
                     choices: [
-                        { name: "Ticket de ajuda", value: 3 },
-                        { name: "Ticket de fanart", value: 0 }
+                        { name: "Mensagem de Fanarts", value: 3 },
+                        { name: "Mensagem de Denúncias", value: 2 },
+                        { name: "Mensagem de Fan-Arts", value: 0 }
                     ],
                     type: ApplicationCommandOptionTypes.Number,
                     required: true

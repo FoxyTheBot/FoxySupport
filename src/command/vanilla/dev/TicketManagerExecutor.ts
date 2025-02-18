@@ -12,6 +12,12 @@ const TICKET_MESSAGES = {
         emoji: "🖌️",
         label: "Enviar sua primeira fanart"
     },
+    2: {
+        title: "✨ | Denúncia",
+        description: "Denuncie alguém que esteja quebrando as regras do servidor ou da Foxy, nossa equipe irá analisar e tomar as devidas providências.\n\nAntes de denunciar, verifique as regras em <#768268318633099325> e os Termos de Serviço da Foxy em https://foxybot.win/br/support/terms.",
+        emoji: "🚨",
+        label: "Enviar denúncia"
+    },
     3: {
         title: "💖 | Peça ajuda",
         description: `Bem vindo(a) ao nosso sistema de tickets! Aqui você pode pedir ajuda para a nossa equipe e resolver qualquer problema que você tenha. Para abrir um ticket, clique no botão abaixo! \n\nAntes de perguntar, verifique se a resposta para a sua pergunta não está em <#1079103745213870254>.`,
@@ -42,7 +48,12 @@ export default class TicketManagerExecutor {
                         style: 1,
                         emoji: { name: ticketMessage.emoji },
                         label: ticketMessage.label,
-                        customId: createCustomId(ButtonExecutor.OPEN_TICKET, "global", context.commandId, type === 0 ? "fanart" : "help")
+                        customId: createCustomId(
+                            ButtonExecutor.OPEN_TICKET,
+                            "global",
+                            context.commandId,
+                            type,
+                        )
                     }]
                 }]
             });

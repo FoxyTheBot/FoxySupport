@@ -7,7 +7,7 @@ import { ButtonExecutor } from "../../../structures/types/buttons";
 import { emotes } from "../../../structures/emotes";
 
 const THREAD_SETTINGS = {
-    fanart: {
+    0: {
         channelId: 1246848838233362584n,
         namePrefix: "Fanart de",
         notificationChannelId: 1246892692282277960n,
@@ -26,7 +26,27 @@ const THREAD_SETTINGS = {
             description: (userId: bigint) => `<@!${userId}> (${userId}) enviou uma nova fanart!`
         }
     },
-    help: {
+    2: {
+        channelId: 1341144687364538378n,
+        namePrefix: "Denúncia de",
+        notificationChannelId: 1341142858140487811n,
+        notificationRoleId: 768268280951472170n,
+        embed: {
+            title: "✨ | Denúncia",
+            description: "Descreva o motivo da sua denúncia e aguarde a nossa equipe!",
+            color: 0x2F3136,
+            footer: { text: "A equipe foi notificada e irá responder em breve! Tenha paciência." }
+        },
+        buttons: [
+            { style: ButtonStyles.Success, label: "Aceitar", accepted: true },
+            { style: ButtonStyles.Danger, label: "Recusar", accepted: false }
+        ],
+        notificationEmbed: {
+            title: "Nova denúncia enviada!",
+            description: (userId: bigint) => `<@!${userId}> (${userId}) enviou uma nova denúncia!`
+        }
+    },
+    3: {
         channelId: 1274403080686796866n,
         namePrefix: "Ticket de",
         notificationChannelId: 1274406619815350364n,
@@ -39,7 +59,7 @@ const THREAD_SETTINGS = {
         },
         buttons: [
             {
-                style: ButtonStyles.Danger, 
+                style: ButtonStyles.Danger,
                 label: "Fechar Ticket",
                 emoji: {
                     id: BigInt(emotes.FOXY_CUPCAKE)
@@ -61,7 +81,7 @@ const OpenThreadButton = async (context: ComponentInteractionContext) => {
     if (!settings) return;
 
     const threadName = `${settings.namePrefix} ${context.interaction.user.username} - ${new Date().toLocaleString()}`;
-    
+
     const thread = await bot.helpers.startThreadWithoutMessage(settings.channelId, {
         type: ChannelTypes.PrivateThread,
         name: threadName,
@@ -82,19 +102,32 @@ const OpenThreadButton = async (context: ComponentInteractionContext) => {
                 style: button.style,
                 label: button.label,
                 emoji: button.emoji ? { id: button.emoji.id } : undefined,
-                customId: createCustomId(ButtonExecutor.CLOSE_TICKET, "global", context.commandId, context.interaction.user.id, button.accepted, thread.id, type)
+                customId: createCustomId(
+                    ButtonExecutor.CLOSE_TICKET,
+                    "global",
+                    context.commandId,
+                    context.interaction.user.id,
+                    button.accepted,
+                    thread.id,
+                    type
+                )
             }))
         }]
     });
 
     setTimeout(() => {
         bot.helpers.sendMessage(settings.notificationChannelId, {
-            content: settings.notificationRoleIds 
-                ? settings.notificationRoleIds.map(id => `<@&${id}>`).join(" | ") 
+            content: settings.notificationRoleIds
+                ? settings.notificationRoleIds.map(id => `<@&${id}>`).join(" | ")
                 : `<@&${settings.notificationRoleId}>`,
             embeds: [{
                 title: settings.notificationEmbed.title,
-                description: settings.notificationEmbed.description(context.interaction.user.id)
+                description: settings.notificationEmbed.description(context.interaction.user.id),
+                color: colors.FOXY_DEFAULT,
+                fields: [{
+                    name: "Ticket",
+                    value: `<#${thread.id}>`
+                }]
             }],
             components: [{
                 type: MessageComponentTypes.ActionRow,

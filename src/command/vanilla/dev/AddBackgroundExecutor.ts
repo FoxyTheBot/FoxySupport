@@ -3,6 +3,7 @@ import { bot } from "../../..";
 import { createActionRow, createButton } from "../../../utils/discord/Component";
 import ChatInputInteractionContext from "../../structures/ChatInputInteractionContext";
 import { emotes } from "../../../structures/emotes";
+import config from "../../../../config.json";
 
 const AddBackgroundExecutor = async (context: ChatInputInteractionContext, endCommand) => {
     const id = context.getOption<string>('id', false)!!;
@@ -62,7 +63,7 @@ const AddBackgroundExecutor = async (context: ChatInputInteractionContext, endCo
     });
 
     setTimeout(async () => {
-        await bot.helpers.sendMessage(1286828114110054461n, {
+        await bot.helpers.sendMessage(config.channels.newStoreItem, {
             content: "<@&1291040494205534239>",
             embeds: [{
                 title: `O background \"${name}"\ foi adicionado à loja!`,
