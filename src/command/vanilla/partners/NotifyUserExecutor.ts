@@ -4,7 +4,7 @@ import ChatInputInteractionContext from "../../structures/ChatInputInteractionCo
 const NotifyUserExecutor = async (context: ChatInputInteractionContext, endCommand) => {
     const guild = await bot.database.getFoxyVerseGuild(context.guildId.toString());
     const isEnabled = context.getOption<boolean>('enable', false)!!;
-    console.log(isEnabled)
+
     if (!guild) {
         context.sendReply({
             content: "O servidor onde o comando foi executado não está registrado!",
