@@ -6,6 +6,7 @@ import ComponentInteractionContext from "../../structures/ComponentInteractionCo
 import { MessageFlags } from "../../../utils/discord/Message";
 import { emotes } from "../../../structures/emotes";
 import config from "../../../../config.json";
+import { logger } from "../../../utils/logger";
 
 const CloseThreadButton = async (context: ComponentInteractionContext) => {
     const [userId, isAccepted, threadId, type] = context.sentData;
@@ -120,7 +121,7 @@ const CloseThreadButton = async (context: ComponentInteractionContext) => {
                     components: [{
                         type: MessageComponentTypes.Button,
                         style: ButtonStyles.Danger,
-                        label: "Fechar Ticket",
+                        label: "Ticket Fechado",
                         emoji: {
                             id: BigInt(emotes.FOXY_PLUSHIE)
                         },
@@ -133,7 +134,26 @@ const CloseThreadButton = async (context: ComponentInteractionContext) => {
             await bot.helpers.removeThreadMember(threadId, userId);
             await bot.helpers.removeThreadMember(threadId, interaction.user.id);
         } catch (e) {
-            console.error(e);
+            logger.error("Failed to send message to user", e);
+            
+            context.sendReply({
+                components: [{
+                    type: MessageComponentTypes.ActionRow,
+                    components: [{
+                        type: MessageComponentTypes.Button,
+                        style: ButtonStyles.Danger,
+                        label: "Ticket fechado",
+                        emoji: {
+                            id: BigInt(emotes.FOXY_PLUSHIE)
+                        },
+                        customId: createCustomId(1, "global", context.commandId, context.interaction.user.id, null, threadId, "report"),
+                        disabled: true
+                    }]
+                }],
+            })
+
+            await bot.helpers.removeThreadMember(threadId, userId);
+            await bot.helpers.removeThreadMember(threadId, interaction.user.id);
         }
     };
 
