@@ -4,7 +4,7 @@ import { createActionRow, createButton } from "../../utils/discord/Component";
 import { logger } from "../../utils/logger";
 
 const PREMIUM_DURATION_MS = 30 * 24 * 60 * 60 * 1000;
-const PREMIUM_TYPE = "Foxy Premium II";
+const PREMIUM_TYPE = "Foxy Premium I";
 const DASHBOARD_URL = "https://foxybot.win/br/dashboard/subscriptions";
 
 const calculatePremiumDate = (): Date => new Date(Date.now() + PREMIUM_DURATION_MS);
