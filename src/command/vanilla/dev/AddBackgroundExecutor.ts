@@ -84,13 +84,13 @@ const AddBackgroundExecutor = async (context: ChatInputInteractionContext, endCo
                     inline: true
                 }],
                 image: {
-                    url: `https://stuff.foxybot.win/backgrounds/${filename}`
+                    url: `https://stuff.foxybot.xyz/backgrounds/${filename}`
                 }
             }],
             components: [createActionRow([createButton({
                 label: "Ver background na loja",
                 style: ButtonStyles.Link,
-                url: `https://foxybot.win/br/store`,
+                url: `https://foxybot.xyz/br/store`,
                 emoji: {
                     id: BigInt(emotes.FOXY_WOW)
                 }
