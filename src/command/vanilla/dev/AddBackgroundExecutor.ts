@@ -4,6 +4,14 @@ import ChatInputInteractionContext from "../../structures/ChatInputInteractionCo
 const backgroundsBatch = new Map<string, Background>();
 
 const AddBackgroundExecutor = async (context: ChatInputInteractionContext, endCommand: () => void) => {
+  if (backgroundsBatch.size >= 10) {
+    await context.sendReply({
+      content: "Você só pode adicionar 10 backgrounds por vez!",
+      flags: 64,
+    });
+    return endCommand();
+  }
+
   const id = context.getOption<string>('id', false)!!;
   const name = context.getOption<string>('name', false);
   let cakes: number;
@@ -42,7 +50,7 @@ const AddBackgroundExecutor = async (context: ChatInputInteractionContext, endCo
   backgroundsBatch.set(id, background);
 
   await context.sendReply({
-    content: `Background ${name} registrado com sucesso!`,
+    content: `Background ${name} registrado com sucesso! (${backgroundsBatch.size}/10)`,
     flags: 64,
   });
 

@@ -18,7 +18,7 @@ const AnnounceBatchExecutor = async (context: ChatInputInteractionContext, endCo
         description: bg.description,
         color: colors.RANDOM,
         fields: [
-            { name: "Preço", value: `${bg.cakes.toLocaleString("pt-BR")} Cakes`, inline: true },
+            { name: "Preço", value: `**${bg.cakes.toLocaleString("pt-BR")}** Cakes`, inline: true },
             { name: "Coleção", value: bg.collection || "Desconhecida", inline: true },
             { name: "Autor", value: bg.author || "Desconhecido", inline: true },
         ],
