@@ -2,6 +2,7 @@ import { backgroundsBatch } from "./AddBackgroundExecutor";
 import { bot } from "../../..";
 import ChatInputInteractionContext from "../../structures/ChatInputInteractionContext";
 import config from "../../../../config.json";
+import { colors } from "../../../utils/colors";
 
 const AnnounceBatchExecutor = async (context: ChatInputInteractionContext, endCommand: () => void) => {
     if (backgroundsBatch.size === 0) {
@@ -15,6 +16,7 @@ const AnnounceBatchExecutor = async (context: ChatInputInteractionContext, endCo
     const embeds = [...backgroundsBatch.values()].map(bg => ({
         title: `O background "${bg.name}" foi adicionado à loja!`,
         description: bg.description,
+        color: colors.RANDOM,
         fields: [
             { name: "Preço", value: `${bg.cakes.toLocaleString("pt-BR")} Cakes`, inline: true },
             { name: "Coleção", value: bg.collection || "Desconhecida", inline: true },
