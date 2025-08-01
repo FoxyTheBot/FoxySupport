@@ -2,6 +2,7 @@ import { ApplicationCommandOptionTypes } from "discordeno/types";
 import { createCommand } from "../../../structures/createCommand";
 import UpdateBackgroundExecutor from "../UpdateBackgroundExecutor";
 import AddBackgroundExecutor from "../AddBackgroundExecutor";
+import AnnounceBatchExecutor from "../AnnounceBackgroundsExecutor";
 
 const StoreManagerCommand = createCommand({
     name: "store",
@@ -90,6 +91,11 @@ const StoreManagerCommand = createCommand({
                 type: ApplicationCommandOptionTypes.Boolean,
                 required: false
             }]
+        },
+        {
+            name: "release",
+            description: "Anuncia os 10 backgrounds registrados",
+            type: ApplicationCommandOptionTypes.SubCommand
         },
         {
             name: "register",
@@ -190,6 +196,10 @@ const StoreManagerCommand = createCommand({
                     case "register": {
                         AddBackgroundExecutor(context, endCommand);
                         break;
+                    }
+
+                    case "release": {
+                        AnnounceBatchExecutor(context, endCommand);
                     }
                 }
             }
