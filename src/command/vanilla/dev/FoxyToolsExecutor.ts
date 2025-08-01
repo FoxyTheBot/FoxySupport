@@ -272,7 +272,7 @@ export default async function FoxyToolsExecutor(context: ChatInputInteractionCon
                     Authorization: config.authorization
                 }
             })
-            api.post(`/status/update`, {
+            api.post(`/api/v1/status/update`, {
                 "name": activity,
                 "status": status,
                 "url": url ?? null,
